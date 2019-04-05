@@ -1,5 +1,5 @@
-const serviceUrl = 'http://bkbapi.dqdgame.com/';
+const serviceUrl = 'http://wlong800.natapp1.cc/';
 const servicePath = {
-  'getSystemInfo': serviceUrl + 'users/messages', // 获取系统信息
-  'gethottopic': serviceUrl + 'gethottopic'
+  'getUsers': serviceUrl + 'users/', // 获取系统信息
+  'getConfig': serviceUrl + 'config/' //global接口
 };
