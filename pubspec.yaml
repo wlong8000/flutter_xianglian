@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   shared_preferences: ^0.4.2
   dio: ^2.1.0  #接口请求使用的库
+  flutter_spinkit: ^3.1.0 #loading样式
 
 dev_dependencies:
   flutter_test:

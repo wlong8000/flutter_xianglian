@@ -1,6 +1,7 @@
 //网络请求基础封装
 import 'package:dio/dio.dart';
 import 'dart:io';
+import 'dart:convert';
 import '../config/service_url.dart';
 
 //Post请求
@@ -39,7 +40,7 @@ Future getRequest(url, {String header, Map<String, String> params}) async {
       response = await dio.get(url, queryParameters: params);
     }
     if (response.statusCode == 200) {
-      return response.data;
+      return json.encode(response.data);
     } else {
       throw Exception('LeeGof : 后端接口出现异常，请检测代码和服务器情况');
     }

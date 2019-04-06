@@ -8,3 +8,7 @@ var nativeRequestHeader;
 Future getGlobal() async {
   return getRequest(servicePath['getConfig']);
 }
+
+Future getUsers() async {
+  return getRequest(servicePath['getUsers']);
+}
