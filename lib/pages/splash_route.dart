@@ -40,7 +40,7 @@ class _SplashPage extends State<SplashRoute> {
   _request() {
     Future future = getGlobal();
     future.then((data) {
-      add("key_global", json.encode(data));
+      add("key_global", data);
     });
   }
 }
