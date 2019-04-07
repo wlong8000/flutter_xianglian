@@ -3,12 +3,16 @@ import 'dart:async';
 import 'net_request.dart';
 import '../config/service_url.dart';
 
-var nativeRequestHeader;
-
 Future getGlobal() async {
   return getRequest(servicePath['getConfig']);
 }
 
-Future getUsers() async {
-  return getRequest(servicePath['getUsers']);
+Future getUsers([bool loadMore, String nextUrl]) async {
+  var url;
+  if (loadMore) {
+    url = nextUrl;
+  } else {
+    url = servicePath['getUsers'];
+  }
+  return getRequest(url);
 }
