@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xianglian_fluter/model/main_page_model.dart';
+import 'package:xianglian_fluter/utils/utils.dart';
 
 class MainCell extends StatelessWidget {
   final ResultsListBean mainPageModel;
@@ -9,6 +10,11 @@ class MainCell extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Column(children: <Widget>[
+      Stack(
+        children: <Widget>[
+          Image.network(mainPageModel.pic1, fit: BoxFit.fitWidth, ),
+        ],
+      ),
       Text(mainPageModel.username),
     ],);
   }
