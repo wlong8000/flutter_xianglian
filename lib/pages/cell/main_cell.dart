@@ -16,7 +16,9 @@ class MainCell extends StatelessWidget {
           children: <Widget>[
             Image.network(
               mainPageModel.pic1,
-              fit: BoxFit.fitWidth,
+              fit: BoxFit.none,
+              height: 200,
+              width: 100,
             ),
           ],
         ),
@@ -31,7 +33,7 @@ class MainCell extends StatelessWidget {
           ],
         ),
         Padding(padding: EdgeInsets.fromLTRB(12.0, 0, 12.0, 12.0), child:
-          Text(/*"大家好，我是一名HR,芳年40，希望找一个有责任心的男生，年龄不超过40，有车有房，有事业"*/ mainPageModel.username),)
+          Text("大家好，我是一名HR,芳年40，希望找一个有责任心的男生，年龄不超过40，有车有房，有事业"),)
       ],
     );
   }
