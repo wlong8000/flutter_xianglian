@@ -4,7 +4,6 @@ import 'package:xianglian_fluter/pages/cell/main_cell.dart';
 import 'dart:convert';
 import 'package:xianglian_fluter/services/business_request.dart';
 import 'package:xianglian_fluter/model/main_page_model.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class MainRoute extends StatefulWidget {
   @override

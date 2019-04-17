@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xianglian_fluter/config/color_config.dart';
 import 'package:xianglian_fluter/pages/main_route.dart';
 import 'package:xianglian_fluter/pages/second_route.dart';
 import 'package:xianglian_fluter/pages/three_route.dart';
@@ -51,9 +52,26 @@ class _AppPage extends State<AppRoute> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("首页tab"),
-      ),
+      appBar: PreferredSize(
+          child: AppBar(
+            title: Text(
+              "享恋",
+              style: TextStyle(fontSize: 14),
+            ),
+            centerTitle: true,
+            actions: <Widget>[
+              Padding(
+                padding: EdgeInsets.fromLTRB(0.0, 0.0, 12.0, 0.0),
+                child: GestureDetector(
+                  onTap: () {
+                    print("搜索");
+                  },
+                  child: Icon(Icons.search),
+                ),
+              )
+            ],
+          ),
+          preferredSize: Size.fromHeight(44)),
       body: currentPage(),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -70,78 +88,48 @@ class _AppPage extends State<AppRoute> {
 
   List<BottomNavigationBarItem> buildBottomBarItems() {
     return [
-      new BottomNavigationBarItem(
-          title: new Text(
-            '首页',
-            style: TextStyle(
-                color:
-                    _currentIndex == 0 ? Color(0xFF46c01b) : Color(0xff999999)),
-          ),
-          icon: _currentIndex == 0
-              ? Image.asset(
-                  'images/main_home_selected.png',
-                  width: 32.0,
-                  height: 28.0,
-                )
-              : Image.asset(
-                  'images/main_home.png',
-                  width: 32.0,
-                  height: 28.0,
-                )),
-      new BottomNavigationBarItem(
-          title: new Text(
-            '通讯录',
-            style: TextStyle(
-                color:
-                    _currentIndex == 1 ? Color(0xFF46c01b) : Color(0xff999999)),
-          ),
-          icon: _currentIndex == 1
-              ? Image.asset(
-                  'images/main_meet_selected.png',
-                  width: 32.0,
-                  height: 28.0,
-                )
-              : Image.asset(
-                  'images/main_meet.png',
-                  width: 32.0,
-                  height: 28.0,
-                )),
-      new BottomNavigationBarItem(
-          title: new Text(
-            '发现',
-            style: TextStyle(
-                color:
-                    _currentIndex == 2 ? Color(0xFF46c01b) : Color(0xff999999)),
-          ),
-          icon: _currentIndex == 2
-              ? Image.asset(
-                  'images/main_active_selected.png',
-                  width: 32.0,
-                  height: 28.0,
-                )
-              : Image.asset(
-                  'images/main_active.png',
-                  width: 32.0,
-                  height: 28.0,
-                )),
-      new BottomNavigationBarItem(
-          title: new Text(
-            '我',
-            style: TextStyle(
-                color:
-                    _currentIndex == 3 ? Color(0xFF46c01b) : Color(0xff999999)),
-          ),
-          icon: _currentIndex == 3
-              ? Image.asset(
-                  'images/main_me_selected.png',
-                  width: 32.0,
-                  height: 28.0,
-                )
-              : Image.asset(
-                  'images/main_me.png',
-                  width: 32.0,
-                  height: 28.0,
-                )),
+      _buildBottomNavigationBarItem(
+          titleName: '首页',
+          index: 0,
+          icon: 'images/main_home.png',
+          selectedIcon: 'images/main_home_selected.png'),
+      _buildBottomNavigationBarItem(
+          titleName: '通讯录',
+          index: 1,
+          icon: 'images/main_meet.png',
+          selectedIcon: 'images/main_meet_selected.png'),
+      _buildBottomNavigationBarItem(
+          titleName: '发现',
+          index: 2,
+          icon: 'images/main_active.png',
+          selectedIcon: 'images/main_active_selected.png'),
+      _buildBottomNavigationBarItem(
+          titleName: '我的',
+          index: 3,
+          icon: 'images/main_me.png',
+          selectedIcon: 'images/main_me_selected.png'),
     ];
+  }
+
+  BottomNavigationBarItem _buildBottomNavigationBarItem(
+      {String titleName, int index, String selectedIcon, String icon}) {
+    return BottomNavigationBarItem(
+        title: new Text(
+          titleName,
+          style: TextStyle(
+              color:
+                  _currentIndex == index ? Colors2.color_1 : Color(0xff999999)),
+        ),
+        icon: _currentIndex == index
+            ? Image.asset(
+                selectedIcon,
+                width: 24.0,
+                height: 24.0,
+              )
+            : Image.asset(
+                icon,
+                width: 24.0,
+                height: 24.0,
+              ));
   }
 }
