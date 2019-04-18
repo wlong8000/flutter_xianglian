@@ -12,7 +12,9 @@ class MainCell extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-      padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0),
+//      padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0),
+      margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0),
+      color: Colors.white,
       child: Column(
         children: <Widget>[
           Stack(
@@ -31,30 +33,47 @@ class MainCell extends StatelessWidget {
               ),
             ],
           ),
-          Padding(padding: EdgeInsets.all(3.5)),
-          Row(
-            children: <Widget>[
-              Text('胡歌'),
-              Expanded(
-                child: Container(
-                  alignment: Alignment.centerRight,
-                  child: Text('胡歌'), color: Colors2.color_1,),)
-            ],
-          ),
-          Padding(padding: EdgeInsets.all(3.5)),
-          Row(
-            children: <Widget>[
-              Text('胡歌'),
-              Expanded(
-                child: Container(
-                  alignment: Alignment.centerRight,
-                  child: Text('胡歌'), color: Colors2.color_1,),)
-            ],
-          ),
+          Padding(padding: EdgeInsets.all(3.0)),
           Padding(
-            padding: EdgeInsets.fromLTRB(0.0, 7.0, 0.0, 0.0),
-            child: Text("大家好，我是一名HR,芳年40，希望找一个有责任心的男生，年龄不超过40，有车有房，有事业"),
-          )
+            padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                    child: Text(
+                  "胡歌",
+                  style: TextStyle(color: Colors2.color_3, fontSize: 16),
+                )),
+                Icon(
+                  Icons.location_on,
+                  color: Colors2.color_2,
+                  size: 18,
+                ),
+                Text(
+                  '北京',
+                  style: TextStyle(color: Colors2.color_2, fontSize: 16),
+                )
+              ],
+            ),
+          ),
+          Padding(padding: EdgeInsets.all(3.0)),
+          Container(
+            padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0),
+            child: Text(
+              '34岁 身高 175 体重 75 年收入 15-20万',
+              style: TextStyle(fontSize: 14, color: Colors2.color_3),
+            ),
+            alignment: Alignment.centerLeft,
+          ),
+          Padding(padding: EdgeInsets.all(3.0)),
+          Container(
+            padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0),
+            child: Text(
+              '大家好，我叫小可爱，今年28岁，工作稳定，在一家国企，早九晚五，热爱生活，喜欢旅游，希望找一个志同道合的伙伴',
+              style: TextStyle(fontSize: 13, color: Colors2.color_4),
+            ),
+            alignment: Alignment.centerLeft,
+          ),
+          Padding(padding: EdgeInsets.all(3.0)),
         ],
       ),
     );
