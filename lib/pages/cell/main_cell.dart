@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xianglian_fluter/common/utils.dart';
+import 'package:xianglian_fluter/config/color_config.dart';
 import 'package:xianglian_fluter/model/main_page_model.dart';
 
 class MainCell extends StatelessWidget {
@@ -30,18 +31,28 @@ class MainCell extends StatelessWidget {
               ),
             ],
           ),
-          Wrap(
-            spacing: 5.0,
-            runSpacing: 140.0,
+          Padding(padding: EdgeInsets.all(3.5)),
+          Row(
             children: <Widget>[
-              buildLabel("29岁"),
-              buildLabel("170cm"),
-              buildLabel('双子座'),
-              buildLabel('年收入:20万-30万'),
+              Text('胡歌'),
+              Expanded(
+                child: Container(
+                  alignment: Alignment.centerRight,
+                  child: Text('胡歌'), color: Colors2.color_1,),)
+            ],
+          ),
+          Padding(padding: EdgeInsets.all(3.5)),
+          Row(
+            children: <Widget>[
+              Text('胡歌'),
+              Expanded(
+                child: Container(
+                  alignment: Alignment.centerRight,
+                  child: Text('胡歌'), color: Colors2.color_1,),)
             ],
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(12.0, 0, 12.0, 12.0),
+            padding: EdgeInsets.fromLTRB(0.0, 7.0, 0.0, 0.0),
             child: Text("大家好，我是一名HR,芳年40，希望找一个有责任心的男生，年龄不超过40，有车有房，有事业"),
           )
         ],
