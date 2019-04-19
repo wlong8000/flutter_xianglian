@@ -50,6 +50,7 @@ class ResultsListBean {
   String tag3;
   String expire_time;
   String sub_describe;
+  String price;
 
   static ResultsListBean fromMap(Map<String, dynamic> map) {
     ResultsListBean resultsListBean = new ResultsListBean();
@@ -67,6 +68,7 @@ class ResultsListBean {
     resultsListBean.tag3 = map['tag3'];
     resultsListBean.expire_time = map['expire_time'];
     resultsListBean.sub_describe = map['sub_describe'];
+    resultsListBean.price = map['price'];
     return resultsListBean;
   }
 

@@ -9,4 +9,8 @@ class Colors2 {
   static const Color color_4 = Color(0xffaaa7a7);
   static const Color color_5 = Color(0xfff6f9f8);
   static const Color color_6 = Color(0xff333333);
+  static const Color color_7 = Color(0xfffe2b44);
+  static const Color color_8 = Color(0xffff9500);
+  static const Color color_9 = Color(0xff19bd3f);
+  static const Color color_10 = Color(0xff999999);
 }
