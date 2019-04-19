@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:xianglian_fluter/config/color_config.dart';
 import 'package:xianglian_fluter/pages/main_route.dart';
-import 'package:xianglian_fluter/pages/second_route.dart';
 import 'package:xianglian_fluter/pages/three_route.dart';
 import 'package:xianglian_fluter/pages/four_route.dart';
+import 'package:xianglian_fluter/pages/party_route.dart';
 
 class AppRoute extends StatefulWidget {
   @override
@@ -17,7 +17,7 @@ class _AppPage extends State<AppRoute> {
 
   MainRoute mainRoute;
 
-  SecondRoute secondRoute;
+  PartyRoute secondRoute;
 
   ThreeRoute threeRoute;
 
@@ -32,7 +32,7 @@ class _AppPage extends State<AppRoute> {
         return mainRoute;
       case 1:
         if (secondRoute == null) {
-          secondRoute = new SecondRoute();
+          secondRoute = new PartyRoute();
         }
         return secondRoute;
       case 2:

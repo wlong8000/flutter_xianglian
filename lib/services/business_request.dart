@@ -16,3 +16,13 @@ Future getUsers([bool loadMore, String nextUrl]) async {
   }
   return getRequest(url);
 }
+
+Future getParty([bool loadMore, String nextUrl]) async {
+  var url;
+  if (loadMore) {
+    url = nextUrl;
+  } else {
+    url = servicePath['getParty'];
+  }
+  return getRequest(url);
+}
