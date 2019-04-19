@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:xianglian_fluter/config/color_config.dart';
 import 'package:xianglian_fluter/pages/main_route.dart';
 import 'package:xianglian_fluter/pages/three_route.dart';
-import 'package:xianglian_fluter/pages/four_route.dart';
+import 'package:xianglian_fluter/pages/MyRoute.dart';
 import 'package:xianglian_fluter/pages/party_route.dart';
 
 class AppRoute extends StatefulWidget {
@@ -21,7 +21,7 @@ class _AppPage extends State<AppRoute> {
 
   ThreeRoute threeRoute;
 
-  FourRoute fourRoute;
+  MyRoute fourRoute;
 
   currentPage() {
     switch (_currentIndex) {
@@ -37,7 +37,7 @@ class _AppPage extends State<AppRoute> {
         return secondRoute;
       case 2:
         if (fourRoute == null) {
-          fourRoute = new FourRoute();
+          fourRoute = new MyRoute();
         }
         return fourRoute;
       case 3:
@@ -94,12 +94,12 @@ class _AppPage extends State<AppRoute> {
           icon: 'images/main_home.png',
           selectedIcon: 'images/main_home_selected.png'),
       _buildBottomNavigationBarItem(
-          titleName: '通讯录',
+          titleName: '侃侃',
           index: 1,
           icon: 'images/main_meet.png',
           selectedIcon: 'images/main_meet_selected.png'),
       _buildBottomNavigationBarItem(
-          titleName: '发现',
+          titleName: '活动',
           index: 2,
           icon: 'images/main_active.png',
           selectedIcon: 'images/main_active_selected.png'),

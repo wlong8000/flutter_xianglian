@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
-class SecondRoute extends StatefulWidget {
+class MyRoute extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _SecondPage();
+    return _MyPage();
   }
 }
 
-class _SecondPage extends State<SecondRoute> {
+class _MyPage extends State<MyRoute> {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("首页2"),);
+    return Center(
+      child: Text("首页4"),
+    );
   }
 }
