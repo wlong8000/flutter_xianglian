@@ -19,7 +19,7 @@ class _AppPage extends State<AppRoute> {
 
   PartyRoute secondRoute;
 
-  ThreeRoute threeRoute;
+//  ThreeRoute threeRoute;
 
   MyRoute fourRoute;
 
@@ -40,11 +40,11 @@ class _AppPage extends State<AppRoute> {
           fourRoute = new MyRoute();
         }
         return fourRoute;
-      case 3:
-        if (threeRoute == null) {
-          threeRoute = new ThreeRoute();
-        }
-        return threeRoute;
+//      case 3:
+//        if (threeRoute == null) {
+//          threeRoute = new ThreeRoute();
+//        }
+//        return threeRoute;
       default:
     }
   }
@@ -93,19 +93,19 @@ class _AppPage extends State<AppRoute> {
           index: 0,
           icon: 'images/main_home.png',
           selectedIcon: 'images/main_home_selected.png'),
-      _buildBottomNavigationBarItem(
-          titleName: '侃侃',
-          index: 1,
-          icon: 'images/main_meet.png',
-          selectedIcon: 'images/main_meet_selected.png'),
+//      _buildBottomNavigationBarItem(
+//          titleName: '侃侃',
+//          index: 1,
+//          icon: 'images/main_meet.png',
+//          selectedIcon: 'images/main_meet_selected.png'),
       _buildBottomNavigationBarItem(
           titleName: '活动',
-          index: 2,
+          index: 1,
           icon: 'images/main_active.png',
           selectedIcon: 'images/main_active_selected.png'),
       _buildBottomNavigationBarItem(
           titleName: '我的',
-          index: 3,
+          index: 2,
           icon: 'images/main_me.png',
           selectedIcon: 'images/main_me_selected.png'),
     ];
