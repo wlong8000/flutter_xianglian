@@ -65,6 +65,7 @@ class _AppPage extends State<AppRoute> {
                 child: GestureDetector(
                   onTap: () {
                     print("搜索");
+                    Navigator.of(context).pushReplacementNamed("search");
                   },
                   child: Icon(Icons.search),
                 ),
