@@ -28,7 +28,7 @@ class PartyCell extends StatelessWidget {
           ),
           new Expanded(
             child: Container(
-              height: 90,
+              height: 95,
               padding: EdgeInsets.only(
                 left: 6,
               ),
