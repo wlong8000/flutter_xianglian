@@ -13,4 +13,5 @@ class Colors2 {
   static const Color color_8 = Color(0xffff9500);
   static const Color color_9 = Color(0xff19bd3f);
   static const Color color_10 = Color(0xff999999);
+  static const Color color_toaster = Color(0xffe74c3c);
 }
