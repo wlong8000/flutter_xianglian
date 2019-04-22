@@ -173,7 +173,7 @@ class _SearchPage extends State<SearchRoute> {
             case typeHomeTown:
               break;
             case typeCal:
-              showPickerArray(context);
+              showPickerArray(context, model.type);
               break;
           }
         });
@@ -211,7 +211,7 @@ class _SearchPage extends State<SearchRoute> {
         }).showDialog(context);
   }
 
-  showPickerArray(BuildContext context) {
+  showPickerArray(BuildContext context, int type) {
     new Picker(
         adapter: PickerDataAdapter<String>(
             pickerdata: new JsonDecoder().convert(PickerData2), isArray: true),
@@ -221,22 +221,26 @@ class _SearchPage extends State<SearchRoute> {
         confirmText: '确定',
         onConfirm: (Picker picker, List value) {
           print(value.toString());
-          print(picker.getSelectedValues());
+          _model.minCal = value[0];
+          _model.maxCal = value[1];
+          List<String> list = picker.getSelectedValues();
+          print(list);
+          updateItem(type, list[0], list[1], needSetData: false);
         }).showDialog(context);
   }
 
-  updateItem(int type, int min, int max) {
+  updateItem(int type, min, max, {bool needSetData = true}) {
     for (int i = 0; i < _data.length; i++) {
       SearchPageModel pageModel = _data[i];
       if (pageModel.type == type) {
         pageModel.content = min.toString() + " - " + max.toString();
-        setData(pageModel, type, min, max);
+        if (needSetData) setData(type, min, max);
         break;
       }
     }
   }
 
-  setData(SearchPageModel pageModel, int type, int min, int max) {
+  setData(int type, int min, int max) {
     switch (type) {
       case typeAge:
         _model.minAge = min;
