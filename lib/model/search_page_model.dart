@@ -1,13 +1,15 @@
+import 'package:xianglian_fluter/common/utils.dart';
+
 class SearchPageModel {
   String name;
   String content;
   int type;
 
-  int minAge;
-  int maxAge;
+  int minAge = 0;
+  int maxAge = 99;
 
-  int minHeight;
-  int maxHeight;
+  int minHeight = 0;
+  int maxHeight = 999;
 
   int minWorkPlace;
   int maxWorkPlace;
@@ -15,19 +17,20 @@ class SearchPageModel {
   int minHomeTown;
   int maxHomeTown;
 
-  int minCal;
-  int maxCal;
+  int minCal = 0;
+  int maxCal = 99;
 
   Map<String, dynamic> toJson() => {
-        'minAge': minAge,
-        'maxAge': maxAge,
         'min_height': minHeight,
         'max_height': maxHeight,
-        'minWorkPlace': minWorkPlace,
-        'maxWorkPlace': maxWorkPlace,
-        'minHomeTown': minHomeTown,
-        'maxHomeTown': maxHomeTown,
-        'minCal': minCal,
-        'maxCal': maxCal,
+//        'minWorkPlace': minWorkPlace,
+//        'maxWorkPlace': maxWorkPlace,
+//        'minHomeTown': minHomeTown,
+//        'maxHomeTown': maxHomeTown,
+        'min_education': minCal,
+        'max_education': maxCal,
+        'min_age': getBirthday(maxAge),
+        'max_age': getBirthday(minAge),
       };
+
 }

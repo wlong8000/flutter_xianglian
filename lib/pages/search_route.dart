@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:xianglian_fluter/config/color_config.dart';
@@ -6,6 +8,7 @@ import 'package:xianglian_fluter/common/toaster.dart';
 import 'package:xianglian_fluter/model/search_page_model.dart';
 import 'package:xianglian_fluter/common/string_utils.dart';
 import 'package:xianglian_fluter/common/utils.dart';
+import 'package:xianglian_fluter/file/picker_data.dart';
 
 class SearchRoute extends StatefulWidget {
   @override
@@ -158,25 +161,30 @@ class _SearchPage extends State<SearchRoute> {
         onPressed: () {
           switch (model.type) {
             case typeAge:
+              showPickerNumber(context,
+                  title: '年龄', type: model.type, begin: 18, end: 60);
               break;
             case typeHeight:
-              showPickerNumber(context, model.type);
+              showPickerNumber(context,
+                  title: '身高(cm)', type: model.type, begin: 140, end: 210);
               break;
             case typeWorkPlace:
               break;
             case typeHomeTown:
               break;
             case typeCal:
+              showPickerArray(context);
               break;
           }
         });
   }
 
-  showPickerNumber(BuildContext context, int type) {
+  showPickerNumber(BuildContext context,
+      {int type, String title, int begin, int end}) {
     new Picker(
         adapter: NumberPickerAdapter(data: [
-          NumberPickerColumn(begin: 140, end: 210),
-          NumberPickerColumn(begin: 141, end: 210),
+          NumberPickerColumn(begin: begin, end: end),
+          NumberPickerColumn(begin: begin + 1, end: end),
         ]),
         delimiter: [
           PickerDelimiter(
@@ -187,7 +195,7 @@ class _SearchPage extends State<SearchRoute> {
           ))
         ],
         hideHeader: true,
-        title: new Text("身高(cm)"),
+        title: new Text(getText(title)),
         cancelText: '取消',
         confirmText: '确定',
         onConfirm: (Picker picker, List value) {
@@ -198,14 +206,26 @@ class _SearchPage extends State<SearchRoute> {
             showToast('选择的区间不正确');
             return;
           }
-          _model.minHeight = list[0];
-          _model.maxHeight = list[1];
           updateItem(type, list[0], list[1]);
           setState(() {});
         }).showDialog(context);
   }
 
-  void updateItem(int type, int min, int max) {
+  showPickerArray(BuildContext context) {
+    new Picker(
+        adapter: PickerDataAdapter<String>(
+            pickerdata: new JsonDecoder().convert(PickerData2), isArray: true),
+        hideHeader: true,
+        title: new Text("学历"),
+        cancelText: '取消',
+        confirmText: '确定',
+        onConfirm: (Picker picker, List value) {
+          print(value.toString());
+          print(picker.getSelectedValues());
+        }).showDialog(context);
+  }
+
+  updateItem(int type, int min, int max) {
     for (int i = 0; i < _data.length; i++) {
       SearchPageModel pageModel = _data[i];
       if (pageModel.type == type) {
@@ -216,13 +236,15 @@ class _SearchPage extends State<SearchRoute> {
     }
   }
 
-  void setData(SearchPageModel pageModel, int type, int min, int max) {
+  setData(SearchPageModel pageModel, int type, int min, int max) {
     switch (type) {
       case typeAge:
+        _model.minAge = min;
+        _model.maxAge = max;
         break;
       case typeHeight:
-        pageModel.minHeight = min;
-        pageModel.maxHeight = max;
+        _model.minHeight = min;
+        _model.maxHeight = max;
         break;
       case typeWorkPlace:
         break;
