@@ -6,10 +6,18 @@ import 'package:xianglian_fluter/services/business_request.dart';
 import 'package:xianglian_fluter/model/main_page_model.dart';
 
 class MainRoute extends StatefulWidget {
+  Map<String, dynamic> _params;
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
     return _MainPage();
+  }
+
+  void setSearchData(data) {
+    _params = data;
+    print(data);
+    createState();
   }
 }
 
@@ -22,7 +30,8 @@ class _MainPage extends State<MainRoute> {
   bool _isFirstRequest = true;
 
   Future _getData() async {
-    return getUsers(_isLoadMore, _nextUrl);
+    return getUsers(
+        loadMore: _isLoadMore, nextUrl: _nextUrl, params: widget._params);
   }
 
   @override
@@ -65,7 +74,8 @@ class _MainPage extends State<MainRoute> {
     );
   }
 
-  Widget _buildListView(BuildContext context, AsyncSnapshot snapshot, {loading=false}) {
+  Widget _buildListView(BuildContext context, AsyncSnapshot snapshot,
+      {loading = false}) {
     bool hasData = snapshot.hasData;
     print(">>> _buildRefreshFuture... $hasData");
     if (hasData) {
@@ -109,7 +119,9 @@ class _MainPage extends State<MainRoute> {
             : null,
       );
     } else {
-      return Center(child: Text("暂无数据"),);
+      return Center(
+        child: Text("暂无数据"),
+      );
     }
   }
 

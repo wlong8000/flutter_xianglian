@@ -28,7 +28,7 @@ Future postRequest(url, {formData}) async {
 }
 
 //Get请求
-Future getRequest(url, {String header, Map<String, String> params}) async {
+Future getRequest(url, {String header, Map<String, dynamic> params}) async {
   try {
     Dio dio = new Dio();
     dio.options.contentType =

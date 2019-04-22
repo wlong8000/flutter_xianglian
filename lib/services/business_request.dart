@@ -7,14 +7,14 @@ Future getGlobal() async {
   return getRequest(servicePath['getConfig']);
 }
 
-Future getUsers([bool loadMore, String nextUrl]) async {
+Future getUsers({bool loadMore, String nextUrl,Map<String, dynamic> params}) async {
   var url;
   if (loadMore) {
     url = nextUrl;
   } else {
     url = servicePath['getUsers'];
   }
-  return getRequest(url);
+  return getRequest(url, params: params);
 }
 
 Future getParty([bool loadMore, String nextUrl]) async {

@@ -21,8 +21,8 @@ class SearchPageModel {
   Map<String, dynamic> toJson() => {
         'minAge': minAge,
         'maxAge': maxAge,
-        'minHeight': minHeight,
-        'maxHeight': maxHeight,
+        'min_height': minHeight,
+        'max_height': maxHeight,
         'minWorkPlace': minWorkPlace,
         'maxWorkPlace': maxWorkPlace,
         'minHomeTown': minHomeTown,
