@@ -5,6 +5,7 @@ import 'package:xianglian_fluter/common/touch_callback.dart';
 import 'package:xianglian_fluter/common/toaster.dart';
 import 'package:xianglian_fluter/model/search_page_model.dart';
 import 'package:xianglian_fluter/common/string_utils.dart';
+import 'package:xianglian_fluter/common/utils.dart';
 
 class SearchRoute extends StatefulWidget {
   @override
@@ -21,6 +22,7 @@ class _SearchPage extends State<SearchRoute> {
   static const int typeHomeTown = 3;
   static const int typeCal = 4;
   List<SearchPageModel> _data = [];
+  SearchPageModel _model = SearchPageModel();
 
   @override
   void initState() {
@@ -33,17 +35,17 @@ class _SearchPage extends State<SearchRoute> {
 
     SearchPageModel heightModel = SearchPageModel();
     heightModel.type = typeHeight;
-    heightModel.name = '身高';
+    heightModel.name = '身高(单位:cm)';
     _data.add(heightModel);
 
     SearchPageModel workPlaceModel = SearchPageModel();
     workPlaceModel.type = typeWorkPlace;
-    workPlaceModel.name = '居住地';
+    workPlaceModel.name = '居住地(工作所在地)';
     _data.add(workPlaceModel);
 
     SearchPageModel homeTownModel = SearchPageModel();
     homeTownModel.type = typeHomeTown;
-    homeTownModel.name = '家乡';
+    homeTownModel.name = '出生地(籍贯)';
     _data.add(homeTownModel);
 
     SearchPageModel calModel = SearchPageModel();
@@ -56,33 +58,65 @@ class _SearchPage extends State<SearchRoute> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: AppBar(
-        title: Text('搜索'),
-        centerTitle: true,
-        actions: <Widget>[
-          TouchCallBack(
-              child: Container(
-                padding: EdgeInsets.only(right: 12),
-                child: Text(
-                  '确定',
-                  style: TextStyle(fontSize: 18),
-                ),
-                alignment: Alignment.center,
-              ),
-              onPressed: () {
-                print('确定');
-                Navigator.of(context)
-                    .pop({"lat": 43.821757, "long": -79.226392});
-              }),
+      appBar: PreferredSize(
+          child: AppBar(
+            title: Text('搜索', style: TextStyle(fontSize: 16)),
+            centerTitle: true,
+          ),
+          preferredSize: Size.fromHeight(44)),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+              child: ListView.builder(
+            itemBuilder: (BuildContext context, int index) {
+              return _getItemCell(_data[index]);
+            },
+            itemCount: _data.length,
+          )),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TouchCallBack(
+                  child: _buildDecoratedBox('重置', Colors2.color_1),
+                  onPressed: () {
+                    //todo
+                  }),
+              Padding(padding: EdgeInsets.only(left: 12)),
+              TouchCallBack(
+                  child: _buildDecoratedBox('保存', Colors.white,
+                      bgColor: Colors2.color_1),
+                  onPressed: () {
+                    //todo
+                    Navigator.of(context).pop(_model.toJson());
+                  }),
+            ],
+          ),
+          Padding(padding: EdgeInsets.only(bottom: 12))
         ],
       ),
-      body: ListView.builder(
-        itemBuilder: (BuildContext context, int index) {
-          return _getItemCell(_data[index]);
-        },
-        itemCount: _data.length,
-      ),
     );
+  }
+
+  Widget _buildDecoratedBox(String text, Color color, {Color bgColor}) {
+    if (text == null) {
+      return Text('');
+    } else {
+      return DecoratedBox(
+        decoration: BoxDecoration(
+          border: Border.all(color: color),
+          borderRadius: BorderRadius.circular(2.0),
+          color: bgColor == null ? null : bgColor,
+        ),
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(getScreenWidth(context) / 6, 8.0,
+              getScreenWidth(context) / 6, 8.0),
+          child: Text(
+            text,
+            style: TextStyle(fontSize: 16, color: color),
+          ),
+        ),
+      );
+    }
   }
 
   Widget _getItemCell(SearchPageModel model) {
@@ -100,13 +134,13 @@ class _SearchPage extends State<SearchRoute> {
                 Expanded(
                     child: Text(
                   model.name,
-                  style: TextStyle(fontSize: 16, color: Colors2.color_6),
+                  style: TextStyle(fontSize: 15, color: Colors2.color_6),
                 )),
                 Container(
                   alignment: Alignment.center,
                   child: Text(
-                    getText(model.content),
-                    style: TextStyle(fontSize: 14, color: Colors2.color_6),
+                    getText(model.content, defaultString: '不限'),
+                    style: TextStyle(fontSize: 14, color: Colors2.color_11),
                   ),
                 ),
                 Padding(
@@ -164,19 +198,38 @@ class _SearchPage extends State<SearchRoute> {
             showToast('选择的区间不正确');
             return;
           }
-          String s = list[0].toString() + ' - ' + list[1].toString();
-          updateItem(type, s);
+          _model.minHeight = list[0];
+          _model.maxHeight = list[1];
+          updateItem(type, list[0], list[1]);
           setState(() {});
         }).showDialog(context);
   }
 
-  void updateItem(int type, String content) {
+  void updateItem(int type, int min, int max) {
     for (int i = 0; i < _data.length; i++) {
       SearchPageModel pageModel = _data[i];
       if (pageModel.type == type) {
-        pageModel.content = content;
+        pageModel.content = min.toString() + " - " + max.toString();
+        setData(pageModel, type, min, max);
         break;
       }
+    }
+  }
+
+  void setData(SearchPageModel pageModel, int type, int min, int max) {
+    switch (type) {
+      case typeAge:
+        break;
+      case typeHeight:
+        pageModel.minHeight = min;
+        pageModel.maxHeight = max;
+        break;
+      case typeWorkPlace:
+        break;
+      case typeHomeTown:
+        break;
+      case typeCal:
+        break;
     }
   }
 }

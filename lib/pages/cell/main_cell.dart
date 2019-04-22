@@ -46,11 +46,11 @@ class MainCell extends StatelessWidget {
                 Icon(
                   Icons.location_on,
                   color: Colors2.color_2,
-                  size: 18,
+                  size: 14,
                 ),
                 Text(
                   '北京',
-                  style: TextStyle(color: Colors2.color_2, fontSize: 16),
+                  style: TextStyle(color: Colors2.color_2, fontSize: 14),
                 )
               ],
             ),
