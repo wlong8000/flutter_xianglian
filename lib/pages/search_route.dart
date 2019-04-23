@@ -9,6 +9,8 @@ import 'package:xianglian_fluter/model/search_page_model.dart';
 import 'package:xianglian_fluter/common/string_utils.dart';
 import 'package:xianglian_fluter/common/utils.dart';
 import 'package:xianglian_fluter/file/picker_data.dart';
+import 'package:xianglian_fluter/file/province_data.dart';
+import 'package:xianglian_fluter/pages/adapter/province_adapter.dart';
 
 class SearchRoute extends StatefulWidget {
   @override
@@ -169,14 +171,40 @@ class _SearchPage extends State<SearchRoute> {
                   title: '身高(cm)', type: model.type, begin: 140, end: 210);
               break;
             case typeWorkPlace:
+              showPickerModal(context, model.type);
               break;
             case typeHomeTown:
+              showPickerModal(context, model.type);
               break;
             case typeCal:
               showPickerArray(context, model.type);
               break;
           }
         });
+  }
+
+  showPickerModal(BuildContext context, int type) {
+    Picker(
+        adapter: ProvinceAdapter<String>(
+            pickerData: JsonDecoder().convert(ProvinceData)),
+        changeToFirst: true,
+        hideHeader: false,
+        cancelText: '取消',
+        confirmText: '确定',
+        onConfirm: (Picker picker, List value) {
+          print(value.toString());
+          List<String> list = picker.adapter.getSelectedValues();
+          print(list);
+          updateItem2(type, list[0], list[1]);
+          String text = list[1].toString();
+          text = text.substring(0,text.indexOf('-')-2);
+          if (type == typeWorkPlace) {
+            _model.workPlace = text;
+          } else {
+            _model.homeTown = text;
+          }
+          setState(() {});
+        }).showModal(this.context); //_scaffoldKey.currentState);
   }
 
   showPickerNumber(BuildContext context,
@@ -226,6 +254,7 @@ class _SearchPage extends State<SearchRoute> {
           List<String> list = picker.getSelectedValues();
           print(list);
           updateItem(type, list[0], list[1], needSetData: false);
+          setState(() {});
         }).showDialog(context);
   }
 
@@ -235,6 +264,18 @@ class _SearchPage extends State<SearchRoute> {
       if (pageModel.type == type) {
         pageModel.content = min.toString() + " - " + max.toString();
         if (needSetData) setData(type, min, max);
+        break;
+      }
+    }
+  }
+
+  updateItem2(int type, l1, l2, {bool needSetData = true}) {
+    for (int i = 0; i < _data.length; i++) {
+      SearchPageModel pageModel = _data[i];
+      if (pageModel.type == type) {
+        String s1 = l1.substring(l1.indexOf('-') + 1);
+        String s2 = l2.substring(l2.indexOf('-') + 1);
+        pageModel.content = s1.toString() + "/" + s2.toString();
         break;
       }
     }

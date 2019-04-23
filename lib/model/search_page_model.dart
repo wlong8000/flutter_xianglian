@@ -11,11 +11,8 @@ class SearchPageModel {
   int minHeight = 0;
   int maxHeight = 999;
 
-  int minWorkPlace;
-  int maxWorkPlace;
-
-  int minHomeTown;
-  int maxHomeTown;
+  String workPlace;
+  String homeTown;
 
   int minCal = 0;
   int maxCal = 99;
@@ -23,10 +20,8 @@ class SearchPageModel {
   Map<String, dynamic> toJson() => {
         'min_height': minHeight,
         'max_height': maxHeight,
-//        'minWorkPlace': minWorkPlace,
-//        'maxWorkPlace': maxWorkPlace,
-//        'minHomeTown': minHomeTown,
-//        'maxHomeTown': maxHomeTown,
+        'work_area_code': workPlace,
+//        'born_area_code': homeTown,
         'min_education': minCal,
         'max_education': maxCal,
         'min_age': getBirthday(maxAge),
