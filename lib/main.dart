@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         'app': (BuildContext context) => AppRoute(),
         'search': (BuildContext context) => SearchRoute(),
+        'detail': (BuildContext context) => SearchRoute(),
       },
       home: SplashRoute(),
     );

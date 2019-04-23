@@ -17,6 +17,12 @@ Future getUsers({bool loadMore, String nextUrl,Map<String, dynamic> params}) asy
   return getRequest(url, params: params);
 }
 
+Future getUser({bool loadMore, String nextUrl,int id}) async {
+  var url = servicePath['getUsers'] + "$id/";
+  print('url is $id --------------- ' + url);
+  return getRequest(url);
+}
+
 Future getParty([bool loadMore, String nextUrl]) async {
   var url;
   if (loadMore) {

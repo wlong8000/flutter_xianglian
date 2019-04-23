@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:xianglian_fluter/common/utils.dart';
 import 'package:xianglian_fluter/config/color_config.dart';
-import 'package:xianglian_fluter/model/main_page_model.dart';
+import 'package:xianglian_fluter/model/detail_page_model.dart';
 import 'package:xianglian_fluter/common/string_utils.dart';
 import 'package:xianglian_fluter/common/date_utils.dart';
 import 'package:xianglian_fluter/common/touch_callback.dart';
 import 'package:xianglian_fluter/pages/detail_route.dart';
 
-class MainCell extends StatelessWidget {
-  final ResultsListBean mainPageModel;
+class DetailCell extends StatelessWidget {
+  final Detail_page_model detailPageModel;
 
-  const MainCell({Key key, this.mainPageModel}) : super(key: key);
+  const DetailCell({Key key, this.detailPageModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,34 +19,17 @@ class MainCell extends StatelessWidget {
         child: _buildContainer(context),
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return DetailRoute(id: mainPageModel.id,);
+//            return DetailRoute(id: detailPageModel.id,);
           }));
         });
   }
 
   Container _buildContainer(BuildContext context) {
     return Container(
-//      padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0),
       margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0),
       color: Colors.white,
       child: Column(
         children: <Widget>[
-          Stack(
-            children: <Widget>[
-              Image.network(
-                mainPageModel.pic1,
-                fit: BoxFit.cover,
-                height: getScreenWidth(context) - 10,
-                width: getScreenWidth(context) - 10,
-              ),
-              Image.asset(
-                "images/icon_add_v.png",
-                width: 60,
-                height: 20,
-                fit: BoxFit.fitWidth,
-              ),
-            ],
-          ),
           Padding(padding: EdgeInsets.all(3.0)),
           Padding(
             padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0),
@@ -54,12 +37,12 @@ class MainCell extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                     child: Text(
-                  getText(mainPageModel.username),
+                  getText(detailPageModel.username),
                   style: TextStyle(color: Colors2.color_3, fontSize: 16),
                 )),
-                _buildIcon(mainPageModel.work_area_name),
+                _buildIcon(detailPageModel.work_area_name),
                 Text(
-                  getText(mainPageModel.work_area_name),
+                  getText(detailPageModel.work_area_name),
                   style: TextStyle(color: Colors2.color_2, fontSize: 14),
                 )
               ],
@@ -75,7 +58,7 @@ class MainCell extends StatelessWidget {
           Container(
             padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0),
             child: Text(
-              getText(mainPageModel.person_intro),
+              getText(detailPageModel.person_intro),
               style: TextStyle(fontSize: 13, color: Colors2.color_4),
             ),
             alignment: Alignment.centerLeft,
@@ -89,23 +72,23 @@ class MainCell extends StatelessWidget {
   Text _buildText() {
     ///34岁 身高 175 体重 75 年收入 15-20万
     StringBuffer buffer = StringBuffer();
-    int age = getAge(mainPageModel.birthday);
+    int age = getAge(detailPageModel.birthday);
     if (age > 0) {
       buffer.write('$age岁  ');
     }
-    if (mainPageModel.height > 0) {
+    if (detailPageModel.height > 0) {
       buffer.write('身高 ');
-      buffer.write(mainPageModel.height.floor());
+      buffer.write(detailPageModel.height.floor());
       buffer.write("cm  ");
     }
-    if (mainPageModel.weight > 0) {
+    if (detailPageModel.weight > 0) {
       buffer.write('体重 ');
-      buffer.write(mainPageModel.weight.floor());
+      buffer.write(detailPageModel.weight.floor());
       buffer.write("kg  ");
     }
-    if (mainPageModel.income > 0) {
+    if (detailPageModel.income > 0) {
       buffer.write('年收入 ');
-      buffer.write(mainPageModel.income.floor());
+      buffer.write(detailPageModel.income.floor());
       buffer.write("w");
     }
     return Text(

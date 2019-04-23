@@ -56,7 +56,7 @@ class _MainPage extends State<MainRoute> {
         print('>>> & waiting');
         if (_isFirstRequest) {
           _isFirstRequest = false;
-          return buildLoadingView();
+          return _buildLoadingView();
         }
         return _buildListView(context, snapshot, loading: true);
       case ConnectionState.done:
@@ -68,7 +68,7 @@ class _MainPage extends State<MainRoute> {
     }
   }
 
-  Center buildLoadingView() {
+  Center _buildLoadingView() {
     return Center(
       child: CircularProgressIndicator(),
     );

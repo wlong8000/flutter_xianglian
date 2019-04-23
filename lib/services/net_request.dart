@@ -37,7 +37,6 @@ Future getRequest(url, {String header, Map<String, dynamic> params}) async {
     if (params == null) {
       response = await dio.get(url);
     } else {
-      print(params['min_age'] + ', ' + params['max_age']);
       response = await dio.get(url, queryParameters: params);
     }
     if (response.statusCode == 200) {
