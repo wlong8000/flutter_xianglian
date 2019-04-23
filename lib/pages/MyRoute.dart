@@ -44,7 +44,7 @@ class _MyPage extends State<MyRoute> {
               Padding(padding: EdgeInsets.only(top: 8)),
               CircleAvatar(
                 backgroundImage: new NetworkImage(
-                    'http://jspang.com/static//myimg/blogtouxiang.jpg'),
+                    'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556018983390&di=4ec6efae03d0133811ec4d13234422f2&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01420f568b51a06ac7251bb6bd8871.jpg'),
                 radius: 40.0,
               ),
               Padding(padding: EdgeInsets.only(top: 8)),

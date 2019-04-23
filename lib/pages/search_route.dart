@@ -48,10 +48,10 @@ class _SearchPage extends State<SearchRoute> {
     workPlaceModel.name = '居住地(工作所在地)';
     _data.add(workPlaceModel);
 
-    SearchPageModel homeTownModel = SearchPageModel();
-    homeTownModel.type = typeHomeTown;
-    homeTownModel.name = '出生地(籍贯)';
-    _data.add(homeTownModel);
+//    SearchPageModel homeTownModel = SearchPageModel();
+//    homeTownModel.type = typeHomeTown;
+//    homeTownModel.name = '出生地(籍贯)';
+//    _data.add(homeTownModel);
 
     SearchPageModel calModel = SearchPageModel();
     calModel.type = typeCal;

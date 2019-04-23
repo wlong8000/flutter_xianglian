@@ -60,12 +60,12 @@ class ResultsListBean {
   String pic1;
   String username;
   String mobile;
-  int height;
-  int weight;
-  int nationality;
+  double height;
+  double weight;
+  dynamic nationality;
   int marriage_status;
-  int career;
-  int income;
+  dynamic career;
+  double income;
   int brother_state;
   int id;
   int education;
@@ -73,9 +73,10 @@ class ResultsListBean {
   int position;
   int black_user;
   int member_level;
-  int constellation;
+  dynamic constellation;
   int parent_work;
   int expect_marry_time;
+  String person_intro;
 
   static ResultsListBean fromMap(Map<String, dynamic> map) {
     ResultsListBean resultsListBean = new ResultsListBean();
@@ -86,22 +87,23 @@ class ResultsListBean {
     resultsListBean.pic1 = map['pic1'];
     resultsListBean.username = map['username'];
     resultsListBean.mobile = map['mobile'];
-//    resultsListBean.height = map['height'];
-//    resultsListBean.weight = map['weight'];
-//    resultsListBean.nationality = map['nationality'];
-//    resultsListBean.marriage_status = map['marriage_status'];
-//    resultsListBean.career = map['career'];
-//    resultsListBean.income = map['income'];
-//    resultsListBean.brother_state = map['brother_state'];
-//    resultsListBean.id = map['id'];
-//    resultsListBean.education = map['education'];
-//    resultsListBean.is_top = map['is_top'];
-//    resultsListBean.position = map['position'];
-//    resultsListBean.black_user = map['black_user'];
-//    resultsListBean.member_level = map['member_level'];
-//    resultsListBean.constellation = map['constellation'];
-//    resultsListBean.parent_work = map['parent_work'];
-//    resultsListBean.expect_marry_time = map['expect_marry_time'];
+    resultsListBean.height = map['height'];
+    resultsListBean.weight = map['weight'];
+    resultsListBean.nationality = map['nationality'];
+    resultsListBean.marriage_status = map['marriage_status'];
+    resultsListBean.career = map['career'];
+    resultsListBean.income = map['income'];
+    resultsListBean.brother_state = map['brother_state'];
+    resultsListBean.id = map['id'];
+    resultsListBean.education = map['education'];
+    resultsListBean.is_top = map['is_top'];
+    resultsListBean.position = map['position'];
+    resultsListBean.black_user = map['black_user'];
+    resultsListBean.member_level = map['member_level'];
+    resultsListBean.constellation = map['constellation'];
+    resultsListBean.parent_work = map['parent_work'];
+    resultsListBean.expect_marry_time = map['expect_marry_time'];
+    resultsListBean.person_intro = map['person_intro'];
     return resultsListBean;
   }
 
