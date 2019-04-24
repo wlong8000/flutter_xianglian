@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:xianglian_fluter/config/const_config.dart';
@@ -52,8 +54,11 @@ class _AppPage extends State<AppRoute> {
 
   @override
   void initState() {
-    ///把状态栏显示出来
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+    if (Platform.isAndroid) {
+      ///把状态栏显示出来
+      SystemChrome.setEnabledSystemUIOverlays(
+          [SystemUiOverlay.top, SystemUiOverlay.bottom]);
+    }
     super.initState();
   }
 
