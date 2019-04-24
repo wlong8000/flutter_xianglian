@@ -1,3 +1,3 @@
 String getText(String text, {String defaultString = ''}) {
-  return text == null ? defaultString : text;
+  return text == null || text == 'null' ? defaultString : text;
 }

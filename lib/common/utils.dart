@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-getScreenWidth(BuildContext context) {
+double getScreenWidth(BuildContext context) {
   final size = MediaQuery.of(context).size;
   return size.width;
 }

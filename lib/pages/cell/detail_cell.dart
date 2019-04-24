@@ -120,3 +120,73 @@ class DetailCell extends StatelessWidget {
     );
   }
 }
+
+class DetailTextCell extends StatelessWidget {
+  final Detail_page_model detailPageModel;
+
+  const DetailTextCell({Key key, this.detailPageModel}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Container(
+      padding: EdgeInsets.fromLTRB(12.0, 0.0, 12.0, 0.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border(
+            bottom: BorderSide(
+                width: Size2.divider_height_size,
+                color: Colors2.color_divider)),
+      ),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+              child: Text(
+            detailPageModel.key,
+            style: TextStyle(fontSize: 15, color: Colors2.color_6),
+          )),
+          Text(
+            detailPageModel.value,
+            style: TextStyle(fontSize: 14, color: Colors2.color_11),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class DetailTitleCell extends StatelessWidget {
+  final Detail_page_model detailPageModel;
+
+  const DetailTitleCell({Key key, this.detailPageModel}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border(
+            bottom: BorderSide(
+                width: Size2.divider_height_size,
+                color: Colors2.color_divider)),
+      ),
+      padding: EdgeInsets.only(left: 12, right: 12),
+
+      child: Row(
+        children: <Widget>[
+          Icon(
+            Icons.list,
+            color: Colors2.color_12,
+            size: 18,
+          ),
+          Padding(padding: EdgeInsets.only(left: 3)),
+          Text(
+            getText(detailPageModel.key),
+            style: TextStyle(color: Colors2.color_3, fontSize: 16, fontWeight: FontWeight.w500),
+          )
+        ],
+      ),
+    );
+  }
+}

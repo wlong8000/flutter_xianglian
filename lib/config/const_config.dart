@@ -12,6 +12,8 @@ class Colors2 {
   static const Color color_9 = Color(0xff19bd3f);
   static const Color color_10 = Color(0xff999999);
   static const Color color_11 = Color(0xffbdbcbc);
+  static const Color color_12 = Color(0xff71c673);
+  static const Color color_divider = Color(0xffd9d9d9);
   static const Color color_toaster = Color(0xffe74c3c);
 }
 
@@ -21,6 +23,8 @@ class FontSize2 {
 
 class Size2 {
   static const double app_bar_height_size = 38.0;
+
+  static const double divider_height_size = 0.5;
 }
 
 class String2 {

@@ -1,3 +1,5 @@
+import 'images_model.dart';
+
 class Detail_page_model {
   /**
    * username : "root2"
@@ -35,6 +37,9 @@ class Detail_page_model {
    * images : [{"image_url":"http://ptw.youyuan.com/resize/photo/n/n/n/y/600/600/201807/21/19/00/1532170840448A422FD1.jpg"},{"image_url":"http://ptw.youyuan.com/resize/photo/n/n/n/y/600/600/201807/23/23/23/1532359424664AB73473_c.jpg"},{"image_url":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532607630269&di=1cdf6fef4764b13169e37a6cc223f547&imgtype=0&src=http%3A%2F%2Fs7.sinaimg.cn%2Fmw690%2F006LDoUHzy7auXtxWOG16%26690"}]
    */
 
+  String key;
+  String value;
+  int type;
   String username;
   String last_login;
   String date_joined;
@@ -68,6 +73,7 @@ class Detail_page_model {
   int parent_work;
   int expect_marry_time;
   List<ImagesListBean> images;
+  bool hasDivider;
 
   static Detail_page_model fromMap(Map<String, dynamic> map) {
     Detail_page_model detail_page_model = new Detail_page_model();
@@ -109,28 +115,6 @@ class Detail_page_model {
 
   static List<Detail_page_model> fromMapList(dynamic mapList) {
     List<Detail_page_model> list = new List(mapList.length);
-    for (int i = 0; i < mapList.length; i++) {
-      list[i] = fromMap(mapList[i]);
-    }
-    return list;
-  }
-}
-
-class ImagesListBean {
-  /**
-   * image_url : "http://ptw.youyuan.com/resize/photo/n/n/n/y/600/600/201807/21/19/00/1532170840448A422FD1.jpg"
-   */
-
-  String image_url;
-
-  static ImagesListBean fromMap(Map<String, dynamic> map) {
-    ImagesListBean imagesListBean = new ImagesListBean();
-    imagesListBean.image_url = map['image_url'];
-    return imagesListBean;
-  }
-
-  static List<ImagesListBean> fromMapList(dynamic mapList) {
-    List<ImagesListBean> list = new List(mapList.length);
     for (int i = 0; i < mapList.length; i++) {
       list[i] = fromMap(mapList[i]);
     }
