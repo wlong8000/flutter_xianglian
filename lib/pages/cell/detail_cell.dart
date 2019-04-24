@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xianglian_fluter/common/utils.dart';
-import 'package:xianglian_fluter/config/color_config.dart';
+import 'package:xianglian_fluter/config/const_config.dart';
 import 'package:xianglian_fluter/model/detail_page_model.dart';
 import 'package:xianglian_fluter/common/string_utils.dart';
 import 'package:xianglian_fluter/common/date_utils.dart';

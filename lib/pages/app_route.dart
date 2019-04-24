@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:xianglian_fluter/config/color_config.dart';
+import 'package:flutter/services.dart';
+import 'package:xianglian_fluter/config/const_config.dart';
 import 'package:xianglian_fluter/pages/main_route.dart';
 import 'package:xianglian_fluter/pages/MyRoute.dart';
 import 'package:xianglian_fluter/pages/party_route.dart';
@@ -50,13 +51,20 @@ class _AppPage extends State<AppRoute> {
   }
 
   @override
+  void initState() {
+    ///把状态栏显示出来
+    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
           child: AppBar(
             title: Text(
-              "享恋",
-              style: TextStyle(fontSize: 14),
+              String2.app_name,
+              style: TextStyle(fontSize: FontSize2.app_bar_title_size),
             ),
             centerTitle: true,
             actions: <Widget>[
@@ -76,7 +84,7 @@ class _AppPage extends State<AppRoute> {
               )
             ],
           ),
-          preferredSize: Size.fromHeight(44)),
+          preferredSize: Size.fromHeight(Size2.app_bar_height_size)),
       body: currentPage(),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

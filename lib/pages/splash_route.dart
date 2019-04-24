@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:xianglian_fluter/model/global_model.dart';
 import 'package:xianglian_fluter/services/business_request.dart';
 import 'package:xianglian_fluter/common/shared_preferences_utils.dart';
@@ -7,6 +8,7 @@ import 'dart:convert';
 class SplashRoute extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
+//    SystemChrome.setEnabledSystemUIOverlays([]);
     return _SplashPage();
   }
 }

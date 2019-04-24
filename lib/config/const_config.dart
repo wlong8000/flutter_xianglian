@@ -1,7 +1,5 @@
 import 'dart:ui';
 
-const int color_1 = 0xfffe2b44;
-
 class Colors2 {
   static const Color color_1 = Color(0xfffe2b44);
   static const Color color_2 = Color(0xfffcbd54);
@@ -15,4 +13,19 @@ class Colors2 {
   static const Color color_10 = Color(0xff999999);
   static const Color color_11 = Color(0xffbdbcbc);
   static const Color color_toaster = Color(0xffe74c3c);
+}
+
+class FontSize2 {
+  static const double app_bar_title_size = 15.0;
+}
+
+class Size2 {
+  static const double app_bar_height_size = 38.0;
+}
+
+class String2 {
+  static const String app_name = "享恋";
+  static const String search = "搜索";
+  static const String save = "保存";
+  static const String reset = '重置';
 }

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
-import 'package:xianglian_fluter/config/color_config.dart';
+import 'package:xianglian_fluter/config/const_config.dart';
 import 'package:xianglian_fluter/common/touch_callback.dart';
 import 'package:xianglian_fluter/common/toaster.dart';
 import 'package:xianglian_fluter/model/search_page_model.dart';
@@ -65,10 +65,10 @@ class _SearchPage extends State<SearchRoute> {
     return Scaffold(
       appBar: PreferredSize(
           child: AppBar(
-            title: Text('搜索', style: TextStyle(fontSize: 16)),
+            title: Text(String2.search, style: TextStyle(fontSize: FontSize2.app_bar_title_size)),
             centerTitle: true,
           ),
-          preferredSize: Size.fromHeight(44)),
+          preferredSize: Size.fromHeight(Size2.app_bar_height_size)),
       body: Column(
         children: <Widget>[
           Expanded(
@@ -82,13 +82,13 @@ class _SearchPage extends State<SearchRoute> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TouchCallBack(
-                  child: _buildDecoratedBox('重置', Colors2.color_1),
+                  child: _buildDecoratedBox(String2.reset, Colors2.color_1),
                   onPressed: () {
                     //todo
                   }),
               Padding(padding: EdgeInsets.only(left: 12)),
               TouchCallBack(
-                  child: _buildDecoratedBox('保存', Colors.white,
+                  child: _buildDecoratedBox(String2.save, Colors.white,
                       bgColor: Colors2.color_1),
                   onPressed: () {
                     //todo

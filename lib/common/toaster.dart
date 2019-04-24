@@ -1,5 +1,5 @@
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:xianglian_fluter/config/color_config.dart';
+import 'package:xianglian_fluter/config/const_config.dart';
 
 void showToast(String toast) {
   Fluttertoast.showToast(

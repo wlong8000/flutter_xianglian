@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:xianglian_fluter/config/color_config.dart';
+import 'package:xianglian_fluter/config/const_config.dart';
 import 'package:xianglian_fluter/model/detail_page_model.dart';
 import 'package:xianglian_fluter/services/business_request.dart';
 import 'package:xianglian_fluter/common/string_utils.dart';
@@ -47,7 +47,7 @@ class _DetailPage extends State<DetailRoute> {
               child: FlexibleSpaceBar(
                 title: Text(
                   getText(_detailPageModel.username),
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: FontSize2.app_bar_title_size),
                 ),
                 background: Container(
                   color: Colors.black,
@@ -57,7 +57,7 @@ class _DetailPage extends State<DetailRoute> {
                   ),
                 ),
               ),
-              preferredSize: Size.fromHeight(24)),
+              preferredSize: Size.fromHeight(Size2.app_bar_height_size)),
         ),
 
         SliverPadding(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xianglian_fluter/common/utils.dart';
-import 'package:xianglian_fluter/config/color_config.dart';
+import 'package:xianglian_fluter/config/const_config.dart';
 
 class MyRoute extends StatefulWidget {
   @override

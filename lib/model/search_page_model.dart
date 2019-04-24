@@ -21,7 +21,7 @@ class SearchPageModel {
         'min_height': minHeight,
         'max_height': maxHeight,
         'work_area_code': workPlace,
-//        'born_area_code': homeTown,
+        'born_area_code': homeTown,
         'min_education': minCal,
         'max_education': maxCal,
         'min_age': getBirthday(maxAge),
