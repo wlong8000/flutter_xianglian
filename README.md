@@ -1,16 +1,8 @@
 # xianglian_fluter
 
-A new Flutter application.
+一款婚恋交友app
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+## 先放几只图，功能会在1-2周的时间完善，目标：打造一个商业级别的flutter app,争取上线，欢迎star
+![](http://m.qpic.cn/psb?/b1b6faf2-fef3-4bbe-9134-5a003f0cef33/pxx9ZG1NpPFIfFZ*KKLpWom0rZaidXuGsUGGE19Ovm8!/b/dFMBAAAAAAAA&bo=OATwBgAAAAARB*o!&rf=viewer_4)![](http://m.qpic.cn/psb?/b1b6faf2-fef3-4bbe-9134-5a003f0cef33/CA8NCy2c947MIarZyYn075ytegT5jdxe9EnvJ29npC4!/b/dL8AAAAAAAAA&bo=OATwBgAAAAARF.o!&rf=viewer_4)![](http://m.qpic.cn/psb?/b1b6faf2-fef3-4bbe-9134-5a003f0cef33/vrcYq6L9ykNrXQKbqo1Ye8B4.SUnOtUnDFi2shq3O.g!/b/dDYBAAAAAAAA&bo=OATwBgAAAAARF.o!&rf=viewer_4)
