@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:xianglian_fluter/config/const_config.dart';
 import 'package:xianglian_fluter/model/images_model.dart';
 import 'package:xianglian_fluter/common/widget_utils.dart';
+import 'package:xianglian_fluter/common/touch_callback.dart';
 
 class GalleryRoute extends StatefulWidget {
   final List<ImagesListBean> imagesData;
@@ -35,7 +36,6 @@ class _GalleryPage extends State<GalleryRoute> {
           PageView.builder(
             controller: PageController(initialPage: widget.index),
             onPageChanged: (int index) {
-              print('===========> $index');
               setState(() {
                 _pageIndex = index;
               });
@@ -46,15 +46,20 @@ class _GalleryPage extends State<GalleryRoute> {
             itemCount: widget.imagesData.length,
           ),
           Positioned(
-              child: buildDecoratedBox(
-                  text: String2.save,
-                  textSize: 15,
-                  textColor: Colors.white,
-                  borderColor: Colors2.color_1,
-                  radius: 2.0,
-                  plr: 16.0,
-                  ptm: 8.0,
-                  solidColor: Colors2.color_1)),
+              child: TouchCallBack(
+                  child: buildDecoratedBox(
+                      text: String2.save,
+                      textSize: 15,
+                      textColor: Colors.white,
+                      borderColor: Colors2.color_1,
+                      radius: 2.0,
+                      plr: 16.0,
+                      ptm: 8.0,
+                      solidColor: Colors2.color_1),
+                  onPressed: () {
+                    //todo 保存图片
+
+                  })),
           Positioned(
               right: 12,
               bottom: 12,
@@ -70,4 +75,10 @@ class _GalleryPage extends State<GalleryRoute> {
   }
 
   Image _buildImage(ImagesListBean model) => Image.network(model.image_url);
+
+//  Future<File> _getLocalFile(String fileName) async {
+//    // 获取应用目录
+//    String dir = (await getApplicationDocumentsDirectory()).path;
+//    return new File('$dir/$fileName');
+//  }
 }

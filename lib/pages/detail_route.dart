@@ -209,7 +209,7 @@ class _DetailPage extends State<DetailRoute> {
     _data.add(model);
 
     final int constellationInt =
-        int.parse(_detailPageModel.constellation.toString());
+        int.parse(getText(_detailPageModel.constellation.toString(), defaultString: '0'));
     if (constellationInt >= 0) {
       Detail_page_model constellation = Detail_page_model();
       constellation.key = '星座';
@@ -218,7 +218,7 @@ class _DetailPage extends State<DetailRoute> {
       _data.add(constellation);
     }
 
-    final int educationInt = int.parse(_detailPageModel.education.toString());
+    final int educationInt = int.parse(getText(_detailPageModel.education.toString(), defaultString: '0'));
     if (educationInt >= 0) {
       Detail_page_model education = Detail_page_model();
       education.key = '教育程度';

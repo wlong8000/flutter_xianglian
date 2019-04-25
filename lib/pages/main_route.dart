@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:xianglian_fluter/pages/cell/main_cell.dart';
 import 'dart:convert';
 import 'package:xianglian_fluter/services/business_request.dart';
@@ -22,12 +21,11 @@ class MainRoute extends StatefulWidget {
 }
 
 class _MainPage extends State<MainRoute> {
-  GlobalKey<EasyRefreshState> _easyRefreshKey =
-      new GlobalKey<EasyRefreshState>();
   List<ResultsListBean> _data = [];
   bool _isLoadMore = false;
   String _nextUrl;
   bool _isFirstRequest = true;
+  ScrollController _scrollController = ScrollController();
 
   Future _getData() async {
     return getUsers(
@@ -35,13 +33,58 @@ class _MainPage extends State<MainRoute> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      print('=========> pixels  ' +
+          _scrollController.position.pixels.toString() +
+          ", maxScrollExtent" +
+          _scrollController.position.maxScrollExtent.toString());
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        print("------------加载更多-------------");
+//        _getMoreData();
+        _pullToRefresh2(isLoadMore: true);
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    print(">>> build...");
-    return FutureBuilder(
-      builder: _buildRefreshFuture,
-      future: _getData(),
-    );
+    if (_isFirstRequest) {
+      return FutureBuilder(
+        builder: _buildRefreshFuture,
+        future: _getData(),
+      );
+    } else {
+      return _buildRefreshIndicator();
+    }
+  }
+
+  ///下拉回调方法,方法需要有async和await关键字，没有await，刷新图标立马消失，没有async，刷新图标不会消失
+  Future<Null> _pullToRefresh({bool isLoadMore = false}) async {
+    _isLoadMore = isLoadMore;
+    Future future = await _getData();
+    future.then((value) {
+      setState(() {
+        _setData(value);
+        return null;
+      });
+    });
+  }
+
+  ///没找到为啥，loadMore的时候，加上await，回不来数据了
+  Future<Null> _pullToRefresh2({bool isLoadMore = false}) async {
+    _isLoadMore = isLoadMore;
+    //todo 不知道啥原因，先todo
+//    Future future = await _getData();
+    Future future = _getData();
+    future.then((value) {
+      setState(() {
+        _setData(value);
+        return null;
+      });
+    });
   }
 
   Widget _buildRefreshFuture(BuildContext context, AsyncSnapshot snapshot) {
@@ -58,7 +101,9 @@ class _MainPage extends State<MainRoute> {
           _isFirstRequest = false;
           return _buildLoadingView();
         }
-        return _buildListView(context, snapshot, loading: true);
+
+        ///只有第一次会进来，按理走不到这个地方，所以返回null
+        return null;
       case ConnectionState.done:
         print('>>> & done');
         if (snapshot.hasError) return Text('Error: ${snapshot.error}');
@@ -74,50 +119,11 @@ class _MainPage extends State<MainRoute> {
     );
   }
 
-  Widget _buildListView(BuildContext context, AsyncSnapshot snapshot,
-      {loading = false}) {
+  Widget _buildListView(BuildContext context, AsyncSnapshot snapshot) {
     bool hasData = snapshot.hasData;
-    print(">>> _buildRefreshFuture... $hasData");
     if (hasData) {
-      var resultString = snapshot.data.toString();
-      var data = json.decode(resultString);
-      Main_page_model model = Main_page_model.fromMap(data);
-      _nextUrl = model.next;
-      print(">>> next... $_nextUrl");
-      List<ResultsListBean> results = model.results;
-      if (!loading) {
-        print(">>> &&&&");
-        if (!_isLoadMore) {
-          _data.clear();
-          _data.addAll(results);
-        } else {
-          _data.addAll(results);
-        }
-      }
-
-      return EasyRefresh(
-        key: _easyRefreshKey,
-        behavior: ScrollOverBehavior(),
-        child: _buildListView2(_data),
-        onRefresh: () async {
-          print(">>> onRefresh...");
-          _easyRefreshKey.currentState.waitState(() {
-            setState(() {
-              _isLoadMore = false;
-            });
-          });
-        },
-        loadMore: _nextUrl != null
-            ? () async {
-                print(">>> loadMore...");
-                _easyRefreshKey.currentState.waitState(() {
-                  setState(() {
-                    _isLoadMore = true;
-                  });
-                });
-              }
-            : null,
-      );
+      _handleData(snapshot.data.toString());
+      return _buildRefreshIndicator();
     } else {
       return Center(
         child: Text("暂无数据"),
@@ -125,14 +131,76 @@ class _MainPage extends State<MainRoute> {
     }
   }
 
-  ListView _buildListView2(List<ResultsListBean> results) {
-    return ListView.builder(
-      itemBuilder: (BuildContext context, int index) {
-        return MainCell(
-          mainPageModel: results[index],
-        );
-      },
-      itemCount: results.length,
+  void _handleData(String resultString) {
+    var data = json.decode(resultString);
+    Main_page_model model = Main_page_model.fromMap(data);
+    _nextUrl = model.next;
+    print(">>> next... $_nextUrl");
+    List<ResultsListBean> results = model.results;
+    if (!_isLoadMore) {
+      _data.clear();
+      _data.addAll(results);
+    } else {
+      _data.addAll(results);
+    }
+  }
+
+  _setData(String value) {
+    if (value != null && value.isNotEmpty) {
+      _handleData(value);
+    }
+  }
+
+  Widget _buildRefreshIndicator() {
+    if (_data == null || _data.isEmpty) {
+      return null;
+    }
+    return RefreshIndicator(
+        child: ListView.builder(
+          itemBuilder: (BuildContext context, int index) {
+            if (index == _data.length) {
+              //是否滑动到底部
+              return LoadMoreView();
+            } else {
+              return MainCell(
+                mainPageModel: _data[index],
+              );
+            }
+          },
+          itemCount: _data.length + 1,
+          controller: _scrollController,
+        ),
+        onRefresh: _pullToRefresh);
+  }
+}
+
+class LoadMoreView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: Center(
+          child: Row(
+            children: <Widget>[
+              SizedBox(
+                child: CircularProgressIndicator(
+                  strokeWidth: 3,
+                ),
+                width: 23,
+                height: 23,
+              ),
+              Padding(padding: EdgeInsets.all(10)),
+              Text(
+                '加载中...',
+                style: TextStyle(fontSize: 14),
+              )
+            ],
+            mainAxisAlignment: MainAxisAlignment.center,
+          ),
+        ),
+      ),
+      color: Colors.white70,
     );
   }
 }
