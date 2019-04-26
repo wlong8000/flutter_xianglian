@@ -6,6 +6,7 @@ import 'package:xianglian_fluter/pages/app_route.dart';
 import 'package:xianglian_fluter/pages/splash_route.dart';
 import 'package:xianglian_fluter/pages/search_route.dart';
 import 'package:xianglian_fluter/config/const_config.dart';
+import 'package:xianglian_fluter/pages/webview_route.dart';
 
 void main() {
   runApp(MyApp());
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         'app': (BuildContext context) => AppRoute(),
         'search': (BuildContext context) => SearchRoute(),
+        'webview': (BuildContext context) => WebViewRoute(),
       },
       home: SplashRoute(),
     );

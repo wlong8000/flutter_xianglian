@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:xianglian_fluter/config/const_config.dart';
 import 'package:xianglian_fluter/pages/main_route.dart';
-import 'package:xianglian_fluter/pages/MyRoute.dart';
+import 'package:xianglian_fluter/pages/my_route.dart';
 import 'package:xianglian_fluter/pages/party_route.dart';
 
 class AppRoute extends StatefulWidget {
