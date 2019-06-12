@@ -17,19 +17,19 @@ class MainRoute extends StatefulWidget {
 }
 
 class _MainPage extends State<MainRoute> {
-  String homePageContent = '正在获取数据';
-
-  GlobalKey<EasyRefreshState> _easyRefreshKey = new GlobalKey<EasyRefreshState>();
-  GlobalKey<DQRefreshHeaderState> _headerKey  = new GlobalKey<DQRefreshHeaderState>();
-  GlobalKey<DQRefreshFooterState> _footerKey  = new GlobalKey<DQRefreshFooterState>();
+  GlobalKey<EasyRefreshState> _easyRefreshKey =
+      new GlobalKey<EasyRefreshState>();
+  GlobalKey<DQRefreshHeaderState> _headerKey =
+      new GlobalKey<DQRefreshHeaderState>();
+  GlobalKey<DQRefreshFooterState> _footerKey =
+      new GlobalKey<DQRefreshFooterState>();
 
   List<ResultsListBean> _data = [];
   bool _isLoadMore = false;
   String _nextUrl;
   bool _isFirstRequest = true;
 
-  String showMessage = "";
-  Future requestFuture;
+  Future _requestFuture;
 
   Future _getData() async {
     return getUsers(loadMore: _isLoadMore, nextUrl: _nextUrl);
@@ -37,7 +37,7 @@ class _MainPage extends State<MainRoute> {
 
   @override
   Widget build(BuildContext context) {
-    requestFuture = _getData();
+    _requestFuture = _getData();
     return FutureBuilder(
       builder: _buildRefreshFuture,
       future: _getData(),
@@ -47,20 +47,17 @@ class _MainPage extends State<MainRoute> {
   Widget _buildRefreshFuture(BuildContext context, AsyncSnapshot snapshot) {
     switch (snapshot.connectionState) {
       case ConnectionState.none:
-        print('>>> & 还没有开始网络请求');
-        return Text('还没有开始网络请求');
+        return Text('');
       case ConnectionState.active:
-        print('>>> & active');
-        return Text('ConnectionState.active');
+        return Text('');
       case ConnectionState.waiting:
-        print('>>> & waiting');
+        print('');
         if (_isFirstRequest) {
           _isFirstRequest = false;
           return LoadingKit();
         }
         return _buildListView(context, snapshot, loading: true);
       case ConnectionState.done:
-        print('>>> & done');
         if (snapshot.hasError) return Text('Error: ${snapshot.error}');
         return _buildListView(context, snapshot);
       default:
@@ -68,7 +65,8 @@ class _MainPage extends State<MainRoute> {
     }
   }
 
-  Widget _buildListView(BuildContext context, AsyncSnapshot snapshot, {loading=false}) {
+  Widget _buildListView(BuildContext context, AsyncSnapshot snapshot,
+      {loading = false}) {
     if (snapshot.hasData) {
       var resultString = snapshot.data.toString();
       debugPrint(resultString);
@@ -81,21 +79,18 @@ class _MainPage extends State<MainRoute> {
       print(">>> next... $_nextUrl");
       if (!loading) {
         if (!_isLoadMore) {
-          //如果是下拉刷新或者第一次数据请求，那么直接替换赋值
           _data.clear();
           _data.addAll(list);
         } else {
-          //加载更多的情况
           _data.addAll(list);
-
-          if(snapshot.connectionState == ConnectionState.done) {
-            if(list.length <= 0) {
-              _footerKey.currentState.onNoMore();
-            } else {
-              _footerKey.currentState.onLoaded();
-            }
-            _easyRefreshKey.currentState.callLoadMoreFinish();
-          }
+//          if (snapshot.connectionState == ConnectionState.done) {
+//            if (_nextUrl == null) {
+//              _footerKey.currentState.onLoadRestore();
+//            } else {
+//              _footerKey.currentState.onLoaded();
+//            }
+          _easyRefreshKey.currentState.callLoadMoreFinish();
+//          }
         }
       }
 
@@ -124,21 +119,27 @@ class _MainPage extends State<MainRoute> {
           semanticChildCount: _data.length + 1,
         ),
         onRefresh: () async {
-          await requestFuture;
+          await _requestFuture;
           setState(() {
             _isLoadMore = false;
           });
           _easyRefreshKey.currentState.callRefreshFinish();
         },
-        loadMore: _nextUrl != null ? () async {
-          await requestFuture;
+        loadMore: () async {
+          if (_nextUrl == null) {
+            _easyRefreshKey.currentState.callLoadMoreFinish();
+            return;
+          }
+          await _requestFuture;
           setState(() {
             _isLoadMore = true;
           });
-        } : null,
+        },
       );
     } else {
-      return Center(child: Text("暂无数据"),);
+      return Center(
+        child: Text("暂无数据"),
+      );
     }
   }
 }
