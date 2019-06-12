@@ -1,4 +1,4 @@
-class Main_page_model {
+class MainPageModel {
   /**
    * next : "http://127.0.0.1:8000/users/?format=json&page=2"
    * count : 11
@@ -9,16 +9,16 @@ class Main_page_model {
   int count;
   List<ResultsListBean> results;
 
-  static Main_page_model fromMap(Map<String, dynamic> map) {
-    Main_page_model main_page_model = new Main_page_model();
-    main_page_model.next = map['next'];
-    main_page_model.count = map['count'];
-    main_page_model.results = ResultsListBean.fromMapList(map['results']);
-    return main_page_model;
+  static MainPageModel fromMap(Map<String, dynamic> map) {
+    MainPageModel mainPageModel = new MainPageModel();
+    mainPageModel.next = map['next'];
+    mainPageModel.count = map['count'];
+    mainPageModel.results = ResultsListBean.fromMapList(map['results']);
+    return mainPageModel;
   }
 
-  static List<Main_page_model> fromMapList(dynamic mapList) {
-    List<Main_page_model> list = new List(mapList.length);
+  static List<MainPageModel> fromMapList(dynamic mapList) {
+    List<MainPageModel> list = new List(mapList.length);
     for (int i = 0; i < mapList.length; i++) {
       list[i] = fromMap(mapList[i]);
     }

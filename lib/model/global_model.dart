@@ -1,7 +1,7 @@
 
 
 
-class Global_model {
+class GlobalModel {
 
   /**
    * default_splash_img : "http://ptw.youyuan.com/resize/photo/n/n/n/y/600/600/201807/23/23/23/1532359424664AB73473_c.jpg"
@@ -17,18 +17,19 @@ class Global_model {
   int splash_time;
   int is_jump;
 
-  static Global_model fromMap(Map<String, dynamic> map) {
-    Global_model global_model = new Global_model();
-    global_model.default_splash_img = map['default_splash_img'];
-    global_model.contacts_wx = map['contacts_wx'];
-    global_model.server_path = map['server_path'];
-    global_model.splash_time = map['splash_time'];
-    global_model.is_jump = map['is_jump'];
-    return global_model;
+
+  static GlobalModel fromMap(Map<String, dynamic> map) {
+    GlobalModel globalModel = new GlobalModel();
+    globalModel.default_splash_img = map['default_splash_img'];
+    globalModel.contacts_wx = map['contacts_wx'];
+    globalModel.server_path = map['server_path'];
+    globalModel.splash_time = map['splash_time'];
+    globalModel.is_jump = map['is_jump'];
+    return globalModel;
   }
 
-  static List<Global_model> fromMapList(dynamic mapList) {
-    List<Global_model> list = new List(mapList.length);
+  static List<GlobalModel> fromMapList(dynamic mapList) {
+    List<GlobalModel> list = new List(mapList.length);
     for (int i = 0; i < mapList.length; i++) {
       list[i] = fromMap(mapList[i]);
     }

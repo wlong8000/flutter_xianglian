@@ -1,4 +1,4 @@
-package com.xianglian.xianglian_fluter;
+package com.xianglian.xl_flutter;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

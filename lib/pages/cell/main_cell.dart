@@ -26,7 +26,6 @@ class MainCell extends StatelessWidget {
 
   Container _buildContainer(BuildContext context) {
     return Container(
-//      padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0),
       margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0),
       color: Colors.white,
       child: Column(
@@ -36,8 +35,8 @@ class MainCell extends StatelessWidget {
               Image.network(
                 mainPageModel.pic1,
                 fit: BoxFit.cover,
-                height: getScreenWidth(context) - 10,
-                width: getScreenWidth(context) - 10,
+                height: getScreenWidth(context) - 150,
+                width: getScreenWidth(context) - 150,
               ),
               Image.asset(
                 "images/icon_add_v.png",
@@ -55,12 +54,12 @@ class MainCell extends StatelessWidget {
                 Expanded(
                     child: Text(
                   getText(mainPageModel.username),
-                  style: TextStyle(color: Colors2.color_3, fontSize: 16),
+                  style: TextStyle(color: Colors2.color_3, fontSize: 15),
                 )),
                 _buildIcon(mainPageModel.work_area_name),
                 Text(
                   getText(mainPageModel.work_area_name),
-                  style: TextStyle(color: Colors2.color_2, fontSize: 14),
+                  style: TextStyle(color: Colors2.color_2, fontSize: 13),
                 )
               ],
             ),

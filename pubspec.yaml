@@ -27,11 +27,10 @@ dependencies:
   dio: ^2.1.0  #接口请求使用的库
   flutter_spinkit: ^3.1.0 #loading样式
   flutter_easyrefresh: ^1.2.7
-  flutter_webview_plugin: ^0.3.4
-
+#  flutter_webview_plugin: ^0.3.4
   flutter_picker:
     git: git://github.com/yangyxd/flutter_picker.git
-  fluttertoast: ^2.1.1
+#  fluttertoast: ^2.1.1
 
 dev_dependencies:
   flutter_test:

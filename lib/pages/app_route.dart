@@ -19,8 +19,6 @@ class _AppPage extends State<AppRoute> {
 
   PartyRoute secondRoute;
 
-//  ThreeRoute threeRoute;
-
   MyRoute fourRoute;
 
   currentPage() {
@@ -40,22 +38,12 @@ class _AppPage extends State<AppRoute> {
           fourRoute = new MyRoute();
         }
         return fourRoute;
-//      case 3:
-//        if (threeRoute == null) {
-//          threeRoute = new ThreeRoute();
-//        }
-//        return threeRoute;
       default:
     }
   }
 
   @override
   void initState() {
-//    if (Platform.isAndroid) {
-//      ///把状态栏显示出来
-//      SystemChrome.setEnabledSystemUIOverlays(
-//          [SystemUiOverlay.top, SystemUiOverlay.bottom]);
-//    }
     super.initState();
   }
 
@@ -76,10 +64,9 @@ class _AppPage extends State<AppRoute> {
                   onTap: () {
                     print("搜索");
                     Future f = Navigator.pushNamed(context, 'search');
-                    f.then((data) {
-                      mainRoute.setSearchData(data);
-//                      print(data);
-                    });
+//                    f.then((data) {
+//                      mainRoute.setSearchData(data);
+//                    });
                   },
                   child: Icon(Icons.search),
                 ),
@@ -108,11 +95,6 @@ class _AppPage extends State<AppRoute> {
           index: 0,
           icon: 'images/main_home.png',
           selectedIcon: 'images/main_home_selected.png'),
-//      _buildBottomNavigationBarItem(
-//          titleName: '侃侃',
-//          index: 1,
-//          icon: 'images/main_meet.png',
-//          selectedIcon: 'images/main_meet_selected.png'),
       _buildBottomNavigationBarItem(
           titleName: '活动',
           index: 1,

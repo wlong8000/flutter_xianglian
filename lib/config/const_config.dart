@@ -19,6 +19,8 @@ class Colors2 {
 
 class FontSize2 {
   static const double app_bar_title_size = 15.0;
+
+  static const double refresh_size = 15.0;
 }
 
 class Size2 {
