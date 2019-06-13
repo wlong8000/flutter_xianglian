@@ -67,6 +67,8 @@ flutter:
   - images/set_image_bg.png
   - images/icon_choose.png
 
+  - images/icon_back_white.png
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
 

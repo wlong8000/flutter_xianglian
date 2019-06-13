@@ -1,9 +1,10 @@
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:xianglian_fluter/config/const_config.dart';
 import 'package:xianglian_fluter/pages/main_route.dart';
 import 'package:xianglian_fluter/pages/my_route.dart';
 import 'package:xianglian_fluter/pages/party_route.dart';
+import 'package:xianglian_fluter/pages/search_route.dart';
 
 class AppRoute extends StatefulWidget {
   @override
@@ -63,10 +64,14 @@ class _AppPage extends State<AppRoute> {
                 child: GestureDetector(
                   onTap: () {
                     print("搜索");
-                    Future f = Navigator.pushNamed(context, 'search');
-//                    f.then((data) {
-//                      mainRoute.setSearchData(data);
-//                    });
+                    Future f = Navigator.push(context,
+                        CupertinoPageRoute(builder: (context) {
+                      return SearchRoute();
+                    }));
+                    f.then((data) {
+                      print('data $data');
+                      mainRoute.doSome(data);
+                    });
                   },
                   child: Icon(Icons.search),
                 ),
@@ -96,7 +101,7 @@ class _AppPage extends State<AppRoute> {
           icon: 'images/main_home.png',
           selectedIcon: 'images/main_home_selected.png'),
       _buildBottomNavigationBarItem(
-          titleName: '活动',
+          titleName: '故事',
           index: 1,
           icon: 'images/main_active.png',
           selectedIcon: 'images/main_active_selected.png'),

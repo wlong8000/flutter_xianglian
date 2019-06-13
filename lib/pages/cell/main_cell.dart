@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:xianglian_fluter/common/utils.dart';
 import 'package:xianglian_fluter/config/const_config.dart';
@@ -18,7 +19,7 @@ class MainCell extends StatelessWidget {
     return TouchCallBack(
         child: _buildContainer(context),
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
+          Navigator.push(context, CupertinoPageRoute(builder: (context) {
             return DetailRoute(id: mainPageModel.id,);
           }));
         });

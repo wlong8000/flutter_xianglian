@@ -7,12 +7,19 @@ import 'package:xianglian_fluter/common/xl_ui_kit.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:xianglian_fluter/ui/DQRefreshFooter.dart';
 import 'package:xianglian_fluter/ui/DQRefreshHeader.dart';
+import 'package:xianglian_fluter/common/data_callback.dart';
 
 class MainRoute extends StatefulWidget {
+  final DataCallback onCallBack;
+
+  const MainRoute({Key key, this.onCallBack}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _MainPage();
+  }
+
+  void doSome(data) {
+
   }
 }
 
@@ -83,14 +90,7 @@ class _MainPage extends State<MainRoute> {
           _data.addAll(list);
         } else {
           _data.addAll(list);
-//          if (snapshot.connectionState == ConnectionState.done) {
-//            if (_nextUrl == null) {
-//              _footerKey.currentState.onLoadRestore();
-//            } else {
-//              _footerKey.currentState.onLoaded();
-//            }
           _easyRefreshKey.currentState.callLoadMoreFinish();
-//          }
         }
       }
 
