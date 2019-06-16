@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:xianglian_fluter/pages/cell/main_cell.dart';
-import 'dart:convert';
-import 'package:xianglian_fluter/services/business_request.dart';
 import 'package:xianglian_fluter/model/main_page_model.dart';
 import 'package:xianglian_fluter/common/xl_ui_kit.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:xianglian_fluter/ui/DQRefreshFooter.dart';
 import 'package:xianglian_fluter/ui/DQRefreshHeader.dart';
 import 'package:xianglian_fluter/common/data_callback.dart';
+import 'package:xianglian_fluter/viewmodel/main_page_view_model.dart';
 
 class MainRoute extends StatefulWidget {
   final DataCallback onCallBack;
@@ -28,66 +27,45 @@ class _MainPage extends State<MainRoute> {
       new GlobalKey<DQRefreshFooterState>();
 
   List<ResultsListBean> _data = [];
-  bool _isLoadMore = false;
-  String _nextUrl;
-  bool _isFirstRequest = true;
+  List<ResultsListBean> _results;
 
-  Future _requestFuture;
+  MainPageViewModel _mainPageViewModel;
 
-  Future _getData() async {
-    return getUsers(loadMore: _isLoadMore, nextUrl: _nextUrl);
+  ConnectionState _connectionState = ConnectionState.waiting;
+
+  @override
+  void initState() {
+    super.initState();
+    _mainPageViewModel = MainPageViewModel((connectionState, data) {
+      setState(() {
+        _connectionState = connectionState;
+        _results = data;
+      });
+    });
+    _mainPageViewModel.getData(false);
   }
 
   @override
   Widget build(BuildContext context) {
-    _requestFuture = _getData();
-    return FutureBuilder(
-      builder: _buildRefreshFuture,
-      future: _getData(),
-    );
-  }
-
-  Widget _buildRefreshFuture(BuildContext context, AsyncSnapshot snapshot) {
-    switch (snapshot.connectionState) {
-      case ConnectionState.none:
-        return Text('');
-      case ConnectionState.active:
-        return Text('');
-      case ConnectionState.waiting:
-        print('');
-        if (_isFirstRequest) {
-          _isFirstRequest = false;
-          return LoadingKit();
-        }
-        return _buildListView(context, snapshot, loading: true);
-      case ConnectionState.done:
-        if (snapshot.hasError) return Text('Error: ${snapshot.error}');
-        return _buildListView(context, snapshot);
-      default:
-        return Text('还没有开始网络请求');
+    if (_connectionState == ConnectionState.waiting) {
+      return LoadingKit();
     }
+    if (_connectionState == ConnectionState.done) {
+      return _buildListView(context);
+    }
+    return null;
   }
 
-  Widget _buildListView(BuildContext context, AsyncSnapshot snapshot,
-      {loading = false}) {
-    if (snapshot.hasData) {
-      var resultString = snapshot.data.toString();
-      debugPrint(resultString);
-      var data = json.decode(resultString);
-
-      MainPageModel newModel = MainPageModel.fromMap(data);
-      List<ResultsListBean> list = newModel.results;
-
-      _nextUrl = newModel.next;
-      print(">>> next... $_nextUrl");
-      if (!loading) {
-        if (!_isLoadMore) {
-          _data.clear();
-          _data.addAll(list);
-        } else {
-          _data.addAll(list);
-          _easyRefreshKey.currentState.callLoadMoreFinish();
-        }
+  Widget _buildListView(BuildContext context) {
+    if (_data != null) {
+      if (!_mainPageViewModel.loadMore) {
+        _data.clear();
+        _data.addAll(_results);
+        if (_easyRefreshKey.currentState != null)
+          _easyRefreshKey.currentState.callRefreshFinish();
+      } else {
+        _data.addAll(_results);
+        _easyRefreshKey.currentState.callLoadMoreFinish();
       }
 
       return EasyRefresh(
@@ -115,21 +93,23 @@ class _MainPage extends State<MainRoute> {
           semanticChildCount: _data.length + 1,
         ),
         onRefresh: () async {
-          await _requestFuture;
-          setState(() {
-            _isLoadMore = false;
-          });
-          _easyRefreshKey.currentState.callRefreshFinish();
+          _mainPageViewModel.getData(false);
+//          await _requestFuture;
+//          setState(() {
+//            _isLoadMore = false;
+//          });
+//          _easyRefreshKey.currentState.callRefreshFinish();
         },
         loadMore: () async {
-          if (_nextUrl == null) {
+          if (_mainPageViewModel.nextUrl == null) {
             _easyRefreshKey.currentState.callLoadMoreFinish();
             return;
           }
-          await _requestFuture;
-          setState(() {
-            _isLoadMore = true;
-          });
+          _mainPageViewModel.getData(true);
+//          await _requestFuture;
+//          setState(() {
+//            _isLoadMore = true;
+//          });
         },
       );
     } else {

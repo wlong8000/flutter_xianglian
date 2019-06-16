@@ -1,2 +1,4 @@
 
-typedef DataCallback = void Function(dynamic data);
+import 'package:flutter/cupertino.dart';
+
+typedef DataCallback = void Function(ConnectionState connectionState, dynamic data);
