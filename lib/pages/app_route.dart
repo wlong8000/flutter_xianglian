@@ -5,6 +5,7 @@ import 'package:xianglian_fluter/pages/main_route.dart';
 import 'package:xianglian_fluter/pages/my_route.dart';
 import 'package:xianglian_fluter/pages/party_route.dart';
 import 'package:xianglian_fluter/pages/search_route.dart';
+import 'package:xianglian_fluter/pages/three_route.dart';
 
 class AppRoute extends StatefulWidget {
   @override
@@ -19,6 +20,8 @@ class _AppPage extends State<AppRoute> {
   MainRoute mainRoute;
 
   PartyRoute secondRoute;
+
+  VideoRoute videoRoute;
 
   MyRoute fourRoute;
 
@@ -35,17 +38,17 @@ class _AppPage extends State<AppRoute> {
         }
         return secondRoute;
       case 2:
+        if (videoRoute == null) {
+          videoRoute = new VideoRoute();
+        }
+        return videoRoute;
+      case 3:
         if (fourRoute == null) {
           fourRoute = new MyRoute();
         }
         return fourRoute;
       default:
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
   }
 
   @override
@@ -61,20 +64,18 @@ class _AppPage extends State<AppRoute> {
             actions: <Widget>[
               Padding(
                 padding: EdgeInsets.fromLTRB(0.0, 0.0, 12.0, 0.0),
-                child: GestureDetector(
+                child: _currentIndex == 0 ? GestureDetector(
                   onTap: () {
-                    print("搜索");
                     Future f = Navigator.push(context,
                         CupertinoPageRoute(builder: (context) {
                       return SearchRoute();
                     }));
                     f.then((data) {
                       print('data $data');
-                      mainRoute.doSome(data);
                     });
                   },
                   child: Icon(Icons.search),
-                ),
+                ) : null,
               )
             ],
           ),
@@ -106,8 +107,13 @@ class _AppPage extends State<AppRoute> {
           icon: 'images/main_active.png',
           selectedIcon: 'images/main_active_selected.png'),
       _buildBottomNavigationBarItem(
-          titleName: '我的',
+          titleName: '活动',
           index: 2,
+          icon: 'images/main_me.png',
+          selectedIcon: 'images/main_me_selected.png'),
+      _buildBottomNavigationBarItem(
+          titleName: '我的',
+          index: 3,
           icon: 'images/main_me.png',
           selectedIcon: 'images/main_me_selected.png'),
     ];

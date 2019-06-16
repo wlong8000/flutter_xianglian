@@ -17,10 +17,6 @@ class MainRoute extends StatefulWidget {
   State<StatefulWidget> createState() {
     return _MainPage();
   }
-
-  void doSome(data) {
-
-  }
 }
 
 class _MainPage extends State<MainRoute> {
