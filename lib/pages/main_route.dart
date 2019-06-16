@@ -94,11 +94,6 @@ class _MainPage extends State<MainRoute> {
         ),
         onRefresh: () async {
           _mainPageViewModel.getData(false);
-//          await _requestFuture;
-//          setState(() {
-//            _isLoadMore = false;
-//          });
-//          _easyRefreshKey.currentState.callRefreshFinish();
         },
         loadMore: () async {
           if (_mainPageViewModel.nextUrl == null) {
@@ -106,10 +101,6 @@ class _MainPage extends State<MainRoute> {
             return;
           }
           _mainPageViewModel.getData(true);
-//          await _requestFuture;
-//          setState(() {
-//            _isLoadMore = true;
-//          });
         },
       );
     } else {
