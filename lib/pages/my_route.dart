@@ -10,9 +10,15 @@ class MyRoute extends StatefulWidget {
   }
 }
 
-class _MyPage extends State<MyRoute> {
+class _MyPage extends State<MyRoute> with AutomaticKeepAliveClientMixin {
+  @override
+  void initState() {
+    super.initState();
+    print("MyRoute initState");
+  }
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return ListView(
       children: <Widget>[
         _getHeaderCell(),
@@ -87,4 +93,8 @@ class _MyPage extends State<MyRoute> {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

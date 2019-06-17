@@ -6,12 +6,13 @@ class VideoRoute extends StatefulWidget {
   _VideoRouteState createState() => _VideoRouteState();
 }
 
-class _VideoRouteState extends State<VideoRoute> {
+class _VideoRouteState extends State<VideoRoute> with AutomaticKeepAliveClientMixin {
   VideoPlayerController _controller;
 
   @override
   void initState() {
     super.initState();
+    print("VideoRoute initState");
     _controller = VideoPlayerController.network(
         'http://cstv.live.wscdns.com/live/xiamen/playlist.m3u8')
       ..initialize().then((_) {
@@ -21,6 +22,7 @@ class _VideoRouteState extends State<VideoRoute> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return MaterialApp(
       title: 'Video Demo',
       home: Scaffold(
@@ -53,4 +55,8 @@ class _VideoRouteState extends State<VideoRoute> {
     super.dispose();
     _controller.dispose();
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

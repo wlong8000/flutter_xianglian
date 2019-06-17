@@ -25,6 +25,20 @@ class _AppPage extends State<AppRoute> {
 
   MyRoute fourRoute;
 
+  final bodyList = [MainRoute(), PartyRoute(), VideoRoute(), MyRoute()];
+
+  final pageController = PageController();
+
+  void onTap(int index) {
+    pageController.jumpToPage(index);
+  }
+
+  void onPageChanged(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
   currentPage() {
     switch (_currentIndex) {
       case 0:
@@ -80,15 +94,16 @@ class _AppPage extends State<AppRoute> {
             ],
           ),
           preferredSize: Size.fromHeight(Size2.app_bar_height_size)),
-      body: currentPage(),
+      body: PageView(
+        controller: pageController,
+        onPageChanged: onPageChanged,
+        children: bodyList,
+        physics: NeverScrollableScrollPhysics(), // 禁止滑动
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
-        onTap: ((index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        }),
+        onTap: onTap,
         items: buildBottomBarItems(),
       ),
     );

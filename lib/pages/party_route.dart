@@ -14,7 +14,7 @@ class PartyRoute extends StatefulWidget {
   }
 }
 
-class _PartyPage extends State<PartyRoute> {
+class _PartyPage extends State<PartyRoute> with AutomaticKeepAliveClientMixin {
   GlobalKey<EasyRefreshState> _easyRefreshKey =
       new GlobalKey<EasyRefreshState>();
   List<ResultsListBean> _data = [];
@@ -27,7 +27,14 @@ class _PartyPage extends State<PartyRoute> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    print("PartyRoute initState");
+  }
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     // TODO: implement build
     print(">>> build...");
     return FutureBuilder(
@@ -121,4 +128,8 @@ class _PartyPage extends State<PartyRoute> {
       itemCount: results.length,
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

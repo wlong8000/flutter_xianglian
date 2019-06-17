@@ -18,7 +18,7 @@ class MainRoute extends StatefulWidget {
   }
 }
 
-class _MainPage extends State<MainRoute> {
+class _MainPage extends State<MainRoute> with AutomaticKeepAliveClientMixin {
   GlobalKey<EasyRefreshState> _easyRefreshKey =
       new GlobalKey<EasyRefreshState>();
   GlobalKey<DQRefreshHeaderState> _headerKey =
@@ -36,6 +36,7 @@ class _MainPage extends State<MainRoute> {
   @override
   void initState() {
     super.initState();
+    print("MainRoute initState");
     _mainPageViewModel = MainPageViewModel((connectionState, data) {
       setState(() {
         _connectionState = connectionState;
@@ -47,6 +48,7 @@ class _MainPage extends State<MainRoute> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     if (_connectionState == ConnectionState.waiting) {
       return LoadingKit();
     }
@@ -109,4 +111,7 @@ class _MainPage extends State<MainRoute> {
       );
     }
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
