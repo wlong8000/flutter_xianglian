@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:xianglian_fluter/common/xl_ui_kit.dart';
 import 'package:xianglian_fluter/config/const_config.dart';
 import 'package:xianglian_fluter/common/touch_callback.dart';
+import 'package:xianglian_fluter/model/search_data_model.dart';
 import 'package:xianglian_fluter/model/search_page_model.dart';
 import 'package:xianglian_fluter/common/string_utils.dart';
 import 'package:xianglian_fluter/common/utils.dart';
@@ -58,19 +60,27 @@ class _SearchPage extends State<SearchRoute> {
     _data.add(calModel);
   }
 
+
+
   @override
   Widget build(BuildContext context) {
+    return Consumer2<int, SearchDataModel>(builder: (context, data, model, _) {
+      return _buildBody();
+    },);
+  }
+
+  Widget _buildBody() {
     return Scaffold(
       appBar: XLPreferredSize(String2.search, leading: true,),
       body: Column(
         children: <Widget>[
           Expanded(
               child: ListView.builder(
-            itemBuilder: (BuildContext context, int index) {
-              return _getItemCell(_data[index]);
-            },
-            itemCount: _data.length,
-          )),
+                itemBuilder: (BuildContext context, int index) {
+                  return _getItemCell(_data[index]);
+                },
+                itemCount: _data.length,
+              )),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
