@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:xianglian_fluter/config/const_config.dart';
 import 'package:xianglian_fluter/common/touch_callback.dart';
-import 'package:xianglian_fluter/common/toaster.dart';
 import 'package:xianglian_fluter/model/search_page_model.dart';
 import 'package:xianglian_fluter/common/string_utils.dart';
 import 'package:xianglian_fluter/common/utils.dart';
@@ -231,7 +230,7 @@ class _SearchPage extends State<SearchRoute> {
           print(value.toString());
           print(list);
           if (list[0] > list[1]) {
-            showToast('选择的区间不正确');
+//            showToast('选择的区间不正确');
             return;
           }
           updateItem(type, list[0], list[1]);
