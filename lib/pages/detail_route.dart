@@ -9,6 +9,7 @@ import 'package:xianglian_fluter/pages/cell/detail_cell.dart';
 import 'package:xianglian_fluter/file/user_data.dart';
 import 'package:xianglian_fluter/common/touch_callback.dart';
 import 'package:xianglian_fluter/common/gallery_route.dart';
+import 'package:xianglian_fluter/common/xl_ui_kit.dart';
 
 class DetailRoute extends StatefulWidget {
   final int id;
@@ -153,7 +154,7 @@ class _DetailPage extends State<DetailRoute> {
         print('>>> & waiting');
         if (_isFirstRequest) {
           _isFirstRequest = false;
-          return _buildLoadingView();
+          return LoadingKit();
         }
         return _buildListView(context, snapshot);
       case ConnectionState.done:
@@ -167,12 +168,6 @@ class _DetailPage extends State<DetailRoute> {
 
   Future _getData() async {
     return getUser(id: widget.id);
-  }
-
-  Center _buildLoadingView() {
-    return Center(
-      child: CircularProgressIndicator(),
-    );
   }
 
   Widget _buildListView(BuildContext context, AsyncSnapshot snapshot) {

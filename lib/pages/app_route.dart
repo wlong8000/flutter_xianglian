@@ -1,9 +1,11 @@
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:xianglian_fluter/config/const_config.dart';
 import 'package:xianglian_fluter/pages/main_route.dart';
 import 'package:xianglian_fluter/pages/my_route.dart';
 import 'package:xianglian_fluter/pages/party_route.dart';
+import 'package:xianglian_fluter/pages/search_route.dart';
+import 'package:xianglian_fluter/pages/three_route.dart';
 
 class AppRoute extends StatefulWidget {
   @override
@@ -19,9 +21,23 @@ class _AppPage extends State<AppRoute> {
 
   PartyRoute secondRoute;
 
-//  ThreeRoute threeRoute;
+  VideoRoute videoRoute;
 
   MyRoute fourRoute;
+
+  final bodyList = [MainRoute(), PartyRoute(), VideoRoute(), MyRoute()];
+
+  final pageController = PageController();
+
+  void onTap(int index) {
+    pageController.jumpToPage(index);
+  }
+
+  void onPageChanged(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
 
   currentPage() {
     switch (_currentIndex) {
@@ -36,27 +52,17 @@ class _AppPage extends State<AppRoute> {
         }
         return secondRoute;
       case 2:
+        if (videoRoute == null) {
+          videoRoute = new VideoRoute();
+        }
+        return videoRoute;
+      case 3:
         if (fourRoute == null) {
           fourRoute = new MyRoute();
         }
         return fourRoute;
-//      case 3:
-//        if (threeRoute == null) {
-//          threeRoute = new ThreeRoute();
-//        }
-//        return threeRoute;
       default:
     }
-  }
-
-  @override
-  void initState() {
-//    if (Platform.isAndroid) {
-//      ///把状态栏显示出来
-//      SystemChrome.setEnabledSystemUIOverlays(
-//          [SystemUiOverlay.top, SystemUiOverlay.bottom]);
-//    }
-    super.initState();
   }
 
   @override
@@ -72,30 +78,32 @@ class _AppPage extends State<AppRoute> {
             actions: <Widget>[
               Padding(
                 padding: EdgeInsets.fromLTRB(0.0, 0.0, 12.0, 0.0),
-                child: GestureDetector(
+                child: _currentIndex == 0 ? GestureDetector(
                   onTap: () {
-                    print("搜索");
-                    Future f = Navigator.pushNamed(context, 'search');
+                    Future f = Navigator.push(context,
+                        CupertinoPageRoute(builder: (context) {
+                      return SearchRoute();
+                    }));
                     f.then((data) {
-                      mainRoute.setSearchData(data);
-//                      print(data);
+                      print('data $data');
                     });
                   },
                   child: Icon(Icons.search),
-                ),
+                ) : null,
               )
             ],
           ),
           preferredSize: Size.fromHeight(Size2.app_bar_height_size)),
-      body: currentPage(),
+      body: PageView(
+        controller: pageController,
+        onPageChanged: onPageChanged,
+        children: bodyList,
+        physics: NeverScrollableScrollPhysics(), // 禁止滑动
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
-        onTap: ((index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        }),
+        onTap: onTap,
         items: buildBottomBarItems(),
       ),
     );
@@ -108,19 +116,19 @@ class _AppPage extends State<AppRoute> {
           index: 0,
           icon: 'images/main_home.png',
           selectedIcon: 'images/main_home_selected.png'),
-//      _buildBottomNavigationBarItem(
-//          titleName: '侃侃',
-//          index: 1,
-//          icon: 'images/main_meet.png',
-//          selectedIcon: 'images/main_meet_selected.png'),
       _buildBottomNavigationBarItem(
-          titleName: '活动',
+          titleName: '故事',
           index: 1,
           icon: 'images/main_active.png',
           selectedIcon: 'images/main_active_selected.png'),
       _buildBottomNavigationBarItem(
-          titleName: '我的',
+          titleName: '活动',
           index: 2,
+          icon: 'images/main_me.png',
+          selectedIcon: 'images/main_me_selected.png'),
+      _buildBottomNavigationBarItem(
+          titleName: '我的',
+          index: 3,
           icon: 'images/main_me.png',
           selectedIcon: 'images/main_me_selected.png'),
     ];

@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:xianglian_fluter/services/business_request.dart';
 import 'package:xianglian_fluter/model/party_page_model.dart';
 import 'package:xianglian_fluter/pages/cell/party_cell.dart';
+import 'package:xianglian_fluter/common/xl_ui_kit.dart';
 
 class PartyRoute extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class PartyRoute extends StatefulWidget {
   }
 }
 
-class _PartyPage extends State<PartyRoute> {
+class _PartyPage extends State<PartyRoute> with AutomaticKeepAliveClientMixin {
   GlobalKey<EasyRefreshState> _easyRefreshKey =
       new GlobalKey<EasyRefreshState>();
   List<ResultsListBean> _data = [];
@@ -26,7 +27,14 @@ class _PartyPage extends State<PartyRoute> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    print("PartyRoute initState");
+  }
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     // TODO: implement build
     print(">>> build...");
     return FutureBuilder(
@@ -47,7 +55,7 @@ class _PartyPage extends State<PartyRoute> {
         print('>>> & waiting');
         if (_isFirstRequest) {
           _isFirstRequest = false;
-          return buildLoadingView();
+          return LoadingKit();
         }
         return _buildListView(context, snapshot, loading: true);
       case ConnectionState.done:
@@ -57,12 +65,6 @@ class _PartyPage extends State<PartyRoute> {
       default:
         return Text('还没有开始网络请求');
     }
-  }
-
-  Center buildLoadingView() {
-    return Center(
-      child: CircularProgressIndicator(),
-    );
   }
 
   Widget _buildListView(BuildContext context, AsyncSnapshot snapshot,
@@ -126,4 +128,8 @@ class _PartyPage extends State<PartyRoute> {
       itemCount: results.length,
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

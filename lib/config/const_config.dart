@@ -19,12 +19,16 @@ class Colors2 {
 
 class FontSize2 {
   static const double app_bar_title_size = 15.0;
+
+  static const double refresh_size = 15.0;
 }
 
 class Size2 {
   static const double app_bar_height_size = 38.0;
 
   static const double divider_height_size = 0.5;
+
+  static const double app_bar_height = 38.0;
 }
 
 class String2 {

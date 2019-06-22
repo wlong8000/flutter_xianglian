@@ -7,19 +7,19 @@ import 'dart:convert';
 class SplashRoute extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-//    SystemChrome.setEnabledSystemUIOverlays([]);
     return _SplashPage();
   }
 }
 
 class _SplashPage extends State<SplashRoute> {
-  Global_model _globalModel;
+  GlobalModel _globalModel;
 
   @override
   void initState() {
+    super.initState();
     search("key_global", (value) {
       Map<String, dynamic> map = json.decode(value);
-      _globalModel = Global_model.fromMap(map);
+      _globalModel = GlobalModel.fromMap(map);
       print("search global 数据成功");
       setState(() {});
     });
@@ -38,10 +38,8 @@ class _SplashPage extends State<SplashRoute> {
         : Image.network(_globalModel.default_splash_img);
   }
 
-  _request() {
-    Future future = getGlobal();
-    future.then((data) {
-      add("key_global", data);
-    });
+  _request() async {
+    String data = await getGlobal();
+    add("key_global", data);
   }
 }

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
+import 'package:xianglian_fluter/common/xl_ui_kit.dart';
 import 'package:xianglian_fluter/config/const_config.dart';
 import 'package:xianglian_fluter/common/touch_callback.dart';
 import 'package:xianglian_fluter/model/search_page_model.dart';
@@ -14,7 +15,6 @@ import 'package:xianglian_fluter/pages/adapter/province_adapter.dart';
 class SearchRoute extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _SearchPage();
   }
 }
@@ -60,14 +60,8 @@ class _SearchPage extends State<SearchRoute> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
-      appBar: PreferredSize(
-          child: AppBar(
-            title: Text(String2.search, style: TextStyle(fontSize: FontSize2.app_bar_title_size)),
-            centerTitle: true,
-          ),
-          preferredSize: Size.fromHeight(Size2.app_bar_height_size)),
+      appBar: XLPreferredSize(String2.search, leading: true,),
       body: Column(
         children: <Widget>[
           Expanded(
@@ -230,7 +224,6 @@ class _SearchPage extends State<SearchRoute> {
           print(value.toString());
           print(list);
           if (list[0] > list[1]) {
-//            showToast('选择的区间不正确');
             return;
           }
           updateItem(type, list[0], list[1]);
